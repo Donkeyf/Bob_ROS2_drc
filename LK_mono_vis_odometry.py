@@ -61,17 +61,7 @@ class VisualOdometry():
         T[:3, 3] = t
         return T
     
-    def get_state(self, k1, k2):
-        E, _ = cv2.findEssentialMat(k2, k1, self.K, threshold=1, method = cv2.RANSAC)
-        n, R, t, mask = cv2.recoverPose(E, k1, k2)
-        t = np.squeeze(t)
-
-        R, t = self.decomp_essential_mat(E, k1, k2)
-
-        transformation_matrix = self._form_transf(R, np.squeeze(t))
-        return transformation_matrix
-    
-def decomp_essential_mat(self, E, q1, q2):
+    def decomp_essential_mat(self, E, q1, q2):
         """
         Decompose the Essential matrix
 
@@ -132,6 +122,16 @@ def decomp_essential_mat(self, E, q1, q2):
         t = t * relative_scale
 
         return [R1, t]
+
+    def get_state(self, k1, k2):
+        E, _ = cv2.findEssentialMat(k2, k1, self.K, threshold=1, method = cv2.RANSAC)
+        n, R, t, mask = cv2.recoverPose(E, k1, k2)
+        t = np.squeeze(t)
+
+        R, t = self.decomp_essential_mat(E, k1, k2)
+
+        transformation_matrix = self._form_transf(R, np.squeeze(t))
+        return transformation_matrix
 
 def main():
     data_dir = "camera_params"
