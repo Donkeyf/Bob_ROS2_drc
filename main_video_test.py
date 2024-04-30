@@ -12,6 +12,8 @@ black_min = (0, 0, 0)
 black_max = (255, 255, 50)
 
 capture = cv.VideoCapture(0)
+capture.set(3, 128)
+capture.set(4, 96)
 
 while True:
 
@@ -19,13 +21,13 @@ while True:
 
     if not retval:
         break
-
-    frame_resize = cv.resize(frame, (128, 96))
     
     blank_frame = np.zeros_like(frame)
     # blank_frame = cv.copyMakeBorder(blank_frame, 1, 1, 1, 1, cv.BORDER_CONSTANT)
     # blank_frame = frame
 
+
+    frame_resize = frame
     frame_blur = frame_resize
     # frame_blur = cv.GaussianBlur(frame, (45,45), 1)
     # frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
