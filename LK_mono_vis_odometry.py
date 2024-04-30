@@ -128,7 +128,7 @@ class VisualOdometry():
         n, R, t, mask = cv2.recoverPose(E, k1, k2)
         t = np.squeeze(t)
 
-        # R, t = self.decomp_essential_mat(E, k1, k2)
+        R, t = self.decomp_essential_mat(E, k1, k2)
 
         transformation_matrix = self._form_transf(R, np.squeeze(t))
         return transformation_matrix
@@ -173,7 +173,6 @@ def main():
 
         curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
         estimated_path.append((curr_pose[0, 3], curr_pose[2, 3]))
-        print(estimated_path)
          
         if (i == 100):
             break
