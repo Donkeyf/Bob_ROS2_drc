@@ -6,6 +6,9 @@ from lib.visualization import plotting
 
 class VisualOdometry():
     def __init__(self, calib_dir):
+        self.detector = cv2.FastFeatureDetector.create(threshold = 25, nonmaxSuppression=True)
+        self.kMinNumFeature = 1500
+
         with open(calib_dir + "/camera_matrix.pkl", 'rb') as f:
             self.K = pickle.load(f)
 
@@ -16,10 +19,17 @@ class VisualOdometry():
         self.lk_params = dict(winSize  = (21, 21), 
              	criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 30, 0.01))
     
-    def process_frame(self, old_frame, new_frame, prev_keys, new_keys):
+    def process_first_frame(self, frame):
+        keypoints_prev = self.detector.detect(frame)
+        print(keypoints_prev)
+        # keypoint detectors inherit the FeatureDetector interface
+        return np.array([i.pt for i in keypoints_prev], dtype=np.float32)
+
+    def process_frame(self, old_frame, new_frame, prev_keys):
         k1, k2 = self.optical_flow(old_frame, new_frame, prev_keys)
         T = self.get_state(k1, k2)
 
+        new_keys = self.detector.detect(new_frame)
         return np.array([i.pt for i in new_keys], dtype=np.float32), T
 
     def optical_flow(self, prev_img, curr_img, prev_keys):

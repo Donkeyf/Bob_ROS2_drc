@@ -19,10 +19,10 @@ def edge_detection(frame):
     frame_black = colour_filter(frame, black_min, black_max, 5, 5, 0)
     contours_black = get_contours(frame_black)
     print(contours_black)
-    cv.drawContours(frame, contours_black, -1, (0,0,255))
-    cv.imshow('frame', frame)
+    cv.drawContours(blank_frame, contours_black, -1, (0,0,255))
+    cv.imshow('frame', blank_frame)
     key = cv.waitKey(1)
-    return contours_black
+    return blank_frame
 
 
 
@@ -59,14 +59,15 @@ def main():
 
         if(i == 0):
             ret, new_frame = capture.read()
-            prev_keys = edge_detection(new_frame)
+            new_frame = edge_detection(new_frame)
+            prev_keys = vo.process_first_frame(new_frame)
             old_frame = new_frame
             i += 1
             continue
 
         ret, new_frame = capture.read()
-        new_keys = edge_detection(new_frame)
-        prev_keys, transf = vo.process_frame(old_frame, new_frame, prev_keys, new_keys)
+        new_frame = edge_detection(new_frame)
+        prev_keys, transf = vo.process_frame(old_frame, new_frame, prev_keys)
         old_frame = new_frame
 
         curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
