@@ -2,7 +2,6 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
-from sklearn.metrics import confusion_matrix
 
 from bokeh.io import output_file, show
 from bokeh.plotting import figure, ColumnDataSource
