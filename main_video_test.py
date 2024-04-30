@@ -55,26 +55,26 @@ def main():
     i = 0
 
     while(capture.isOpened()):
-        ret, new_frame = capture.read()
-        new_frame = edge_detection(new_frame)  
-        # if(i == 0):
-        #     ret, new_frame = capture.read()
-        #     new_frame = edge_detection(new_frame)
-        #     prev_keys = vo.process_first_frame(new_frame)
-        #     old_frame = new_frame
-        #     i += 1
-        #     continue
-
-        # ret, new_frame = capture.read()
-        # new_frame = edge_detection(new_frame)
-        # prev_keys, transf = vo.process_frame(old_frame, new_frame, prev_keys)
-        # old_frame = new_frame
-
-        # curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
-        # estimated_path.append((curr_pose[0, 3], curr_pose[2, 3]))
+        
          
-        # if (i == 500):
-        #     break
+        if(i == 0):
+            ret, new_frame = capture.read()
+            new_frame = edge_detection(new_frame)
+            prev_keys = vo.process_first_frame(new_frame)
+            old_frame = new_frame
+            i += 1
+            continue
+
+        ret, new_frame = capture.read()
+        new_frame = edge_detection(new_frame)
+        prev_keys, transf = vo.process_frame(old_frame, new_frame, prev_keys)
+        old_frame = new_frame
+
+        curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
+        estimated_path.append((curr_pose[0, 3], curr_pose[2, 3]))
+         
+        if (i == 500):
+            break
 
         i += 1
 
