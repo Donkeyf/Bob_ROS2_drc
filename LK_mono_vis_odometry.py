@@ -173,6 +173,7 @@ def main():
 
         curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
         estimated_path.append((curr_pose[0, 3], curr_pose[2, 3]))
+        print(estimated_path)
          
         if (i == 100):
             break
