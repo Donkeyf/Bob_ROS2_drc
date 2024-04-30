@@ -56,6 +56,7 @@ def main():
     i = 0
 
     while(capture.isOpened()):
+        ret, new_frame = capture.read()
         new_frame = edge_detection(new_frame)  
         # if(i == 0):
         #     ret, new_frame = capture.read()
