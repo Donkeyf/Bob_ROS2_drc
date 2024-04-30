@@ -18,8 +18,7 @@ def edge_detection(frame):
     blank_frame = np.zeros_like(frame)
     frame_black = colour_filter(frame, black_min, black_max, 5, 5, 0)
     contours_black = get_contours(frame_black)
-    print(contours_black)
-    cv.drawContours(blank_frame, contours_black, -1, (0,0,255))
+    cv.drawContours(blank_frame, contours_black, -1, (255,255,255))
     cv.imshow('frame', blank_frame)
     key = cv.waitKey(1)
     return blank_frame
