@@ -66,7 +66,7 @@ while True:
     #         None
 
     cv.imshow('frame', frame)
-    key = cv.waitKey(-1)
+    key = cv.waitKey(1)
 
     if key == ord('f'):
         break
