@@ -29,10 +29,10 @@ def init():
 
 def forward(sec):
     print('forward')
-    gpio.output(p_in1, gpio.LOW)
-    gpio.output(p_in2, gpio.HIGH)
-    gpio.output(p_in3, gpio.HIGH)
-    gpio.output(p_in4, gpio.LOW)
+    gpio.output(p_in1, False)
+    gpio.output(p_in2, True)
+    gpio.output(p_in3, True)
+    gpio.output(p_in4, False)
     time.sleep(sec)
     gpio.cleanup() 
 def reverse(sec):
