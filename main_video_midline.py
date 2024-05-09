@@ -28,7 +28,7 @@ pine_blue_max = (205, 100, 100)
 blue_min = pinehsv_to_cvhsv(pine_blue_min)
 blue_max = pinehsv_to_cvhsv(pine_blue_max)
 
-capture = cv.VideoCapture(1)
+capture = cv.VideoCapture(0)
 capture.set(3, 128)
 capture.set(4, 96)
 

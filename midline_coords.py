@@ -35,7 +35,7 @@ def midline_coords(frame):
         # prev_index = index
         # found = 1
 
-    coords = np.array(coords)
+    coords = np.array(coords, dtype=np.float64)
 
     return coords
 

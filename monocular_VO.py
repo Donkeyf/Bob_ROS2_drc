@@ -15,7 +15,7 @@ class VisualOdometry():
         with open(calib_dir + "/projection_matrix.pkl", 'rb') as f:
             self.P = pickle.load(f)
 
-        with open(calib_dir + "distortion_coefficients.pkl", 'rb') as f:
+        with open(calib_dir + "/distortion_coefficients.pkl", 'rb') as f:
             self.D = pickle.load(f)
 
     def optical_flow(self, prev_img, curr_img, prev_keys):
@@ -29,38 +29,37 @@ class VisualOdometry():
     def get_pose(self, k1, k2):
         E, _ = cv2.findEssentialMat(k1, k2, self.K, threshold=1, method=cv2.RANSAC)
         n ,R, t, mask = cv2.recoverPose(E, k1, k2)
+        t = np.squeeze(t)
 
         T = np.eye(4, dtype=np.float64)
         T[:3, :3] = R
         T[:3, 3] = t
 
-        mtx = np.matmul(self.K, T)
+        T_m = np.zeros((3,4), dtype=np.float64)
+        T_m[:3, :3] = R
+        T_m[:3, 3] = t
+
+        mtx = np.matmul(self.K, T_m)
 
         return T, mtx
 
 
-    def triangulate(self, mtx1, mtx2, b_prev_pts, b_cur_pts, y_prev_pts, y_cur_pts):
-        b_points_3D = cv2.triangulatePoints(mtx1, mtx2, b_prev_pts, b_cur_pts)
-        y_points_3D = cv2.triangulatePoints(mtx1, mtx2, y_prev_pts, y_cur_pts)
-
-        return b_points_3D, y_points_3D
+    def triangulate(self, mtx1, mtx2, prev_pts, cur_pts):
+        points_3D = cv2.triangulatePoints(mtx1, mtx2, prev_pts[:2], cur_pts[:2])
+        return points_3D
     
-    def pnp(self, b_points_3D, y_points_3D, b_cur_pts, y_cur_pts):
-        b_retval, b_rvec, b_tvec = cv2.solvePnP(b_cur_pts, b_points_3D, self.K, self.D)
-        y_retval, y_rvec, y_tvec = cv2.solvePnP(y_cur_pts, y_points_3D, self.K, self.D)
+    def pnp(self, points_3D, cur_pts):
+        retval, rvec, tvec = cv2.solvePnP(cur_pts, points_3D, self.K, self.D)
+        t_vec = np.squeeze(t_vec)
 
-        T_b = np.eye(4, dtype=np.float64)
-        T_b[:3, :3] = b_rvec
-        T_b[:3, 3] = b_tvec
+        T = np.eye(4, dtype=np.float64)
+        T[:3, :3] = rvec
+        T[:3, 3] = tvec
 
-        T_y = np.eye(4, dtype=np.float64)
-        T_y[:3, :3] = y_rvec
-        T_y[:3, 3] = y_tvec
-        return T_b, T_y
+        return T
     
     def process_first_frame(self, frame):
         keypoints_prev = self.detector.detect(frame)
-        print(keypoints_prev)
         # keypoint detectors inherit the FeatureDetector interface
         return np.array([i.pt for i in keypoints_prev], dtype=np.float32)
     

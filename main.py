@@ -6,6 +6,12 @@ from midline_coords import midline_coords
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 from colour_filter import colour_filter
 
+import csv
+
+def format_points(p1):
+    p1_3D = np.ones((3, p1.shape[0]))
+    p1_3D[0], p1_3D[1] = p1[:, 0].copy(), p1[:, 1].copy()
+    return p1_3D
 
 def line_detection(frame):
     # Colours are in HSV
@@ -28,7 +34,7 @@ def line_detection(frame):
     blue_coords = midline_coords(frame_blue)
     yellow_coords = midline_coords(frame_yellow)
 
-    return blue_coords, yellow_coords
+    return blue_coords
 
 
 
@@ -76,11 +82,12 @@ def main():
 
 
     i = 0
+    key = -1
     while(capture.isOpened()):
 
         if(i == 0):
             ret, new_frame = capture.read()
-            b_pts_prev, y_pts_prev = line_detection(new_frame)
+            b_pts_prev = line_detection(new_frame)
             mtx1 = vo.P
             prev_keys = vo.process_first_frame(new_frame)
             old_frame = new_frame
@@ -94,17 +101,41 @@ def main():
         curr_pose = np.matmul(curr_pose, np.linalg.inv(transf))
         bot_path.append((curr_pose[0, 3], 0, curr_pose[2, 3]))
 
-        b_cur_pts, y_cur_pts = line_detection(new_frame)
+        b_cur_pts = line_detection(new_frame)
         
-        b_points_3D, y_points_3D = vo.triangulate(mtx1, mtx2, b_pts_prev, b_cur_pts, y_pts_prev, y_cur_pts)
+
+        b_points_3D = vo.triangulate(mtx1, mtx2, b_pts_prev, b_cur_pts)
         mtx1 = mtx2
         
         b_pts_prev = b_cur_pts
-        y_pts_prev = y_cur_pts
+        # y_pts_prev = y_cur_pts
+
+        T_b = vo.pnp(b_points_3D, b_cur_pts)
+        
 
 
         bcurr_pose = np.matmul(bcurr_pose, np.linalg.inv(b_points_3D))
         b_pose.append(bcurr_pose)
 
-        ycurr_pose = np.matmul(ycurr_pose, np.linalg.inv(y_points_3D))
-        y_pose.append(ycurr_pose)
+
+        # ycurr_pose = np.matmul(ycurr_pose, np.linalg.inv(y_points_3D))
+        # y_pose.append(ycurr_pose)
+
+        i += 1
+
+        key = cv.waitKey(1)
+        
+        if (key > -1):
+            break
+
+    f = open("line_poses.csv", "w")
+    writer = csv.writer(f)
+
+    for x in len(bcurr_pose):
+        row = [bcurr_pose[x][0], bcurr_pose[x][2]]
+        writer.writerow(row)
+
+    f.close()
+
+if __name__=="__main__":
+    main()
