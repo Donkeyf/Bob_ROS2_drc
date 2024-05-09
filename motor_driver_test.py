@@ -82,7 +82,7 @@ while True:
         right_turn(100)
     if command == 'l':
         speed_command = input('Give speed (0 - 100):')
-        change_speed(speed_command)
+        change_speed(int(speed_command))
     
     else:
         print('Bad command')
