@@ -69,6 +69,9 @@ init()
 p_a = gpio.PWM(p_ena,1000)
 p_b = gpio.PWM(p_enb,1000)
 
+p_a.ChangeDutyCycle(50)
+p_b.ChangeDutyCycle(50)
+
 while True:
     command = input('Give input:')
     
