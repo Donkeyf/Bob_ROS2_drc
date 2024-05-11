@@ -1,21 +1,23 @@
 # Pins: 
 
-# 27 - In 1 - Motor 1
+# 27 - In 1 - Motor 1 - Green
 p_in1 = 27
-# 17 - In 2 - Motor 1
+# 17 - In 2 - Motor 1 - Yellow
 p_in2 = 17
-# 24 - In 3 - Motor 2
+# 24 - In 3 - Motor 2 - White furthest from green
 p_in3 = 24
-# 23 - In 4 - Motor 2
+# 23 - In 4 - Motor 2 - White closest to green
 p_in4 = 23
 
-# 13 (pwm) - ENA - Motor 1
+# 13 (pwm) - ENA - Motor 1 - Blue
 p_ena = 13
-# 12 (pwm) - ENB - Motor 2
+# 12 (pwm) - ENB - Motor 2 - Purple
 p_enb = 12
 
 import RPi.GPIO as gpio
 import time
+
+# from gpiozero import Motor
 
 def init():    
     gpio.setmode(gpio.BCM)
@@ -62,15 +64,18 @@ def right_turn(sec):
 def change_speed(speed):
     print('speed:', speed)
     
-    p_a.ChangeDutyCycle(speed)
-    p_b.ChangeDutyCycle(speed)
+    # p_a.ChangeDutyCycle(speed)
+    # p_b.ChangeDutyCycle(speed)
 
 init()
-p_a = gpio.PWM(p_ena,1000)
-p_b = gpio.PWM(p_enb,1000)
+p_a = gpio.PWM(p_ena,100)
+p_b = gpio.PWM(p_enb,100)
 
-p_a.ChangeDutyCycle(50)
-p_b.ChangeDutyCycle(50)
+p_a.start(50)
+p_b.start(50)
+
+# p_a.ChangeDutyCycle(50)
+# p_b.ChangeDutyCycle(50)
 
 while True:
     command = input('Give input:')
