@@ -39,7 +39,7 @@ def forward():
     gpio.output(p_in3, True)
     gpio.output(p_in4, False)
     # time.sleep(sec)
-    gpio.cleanup() 
+    # gpio.cleanup() 
 def reverse():
     print('reverse')
     gpio.output(p_in1, True)
@@ -47,7 +47,7 @@ def reverse():
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
     # time.sleep(sec)
-    gpio.cleanup()
+    # gpio.cleanup()
 def left_turn():
     print('left')
     gpio.output(p_in1, True)
@@ -55,7 +55,7 @@ def left_turn():
     gpio.output(p_in3, True)
     gpio.output(p_in4, False)
     # time.sleep(sec)
-    gpio.cleanup()
+    # gpio.cleanup()
 def right_turn():
     print('right')
     gpio.output(p_in1, False)
@@ -63,7 +63,7 @@ def right_turn():
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
     # time.sleep(sec)
-    gpio.cleanup()
+    # gpio.cleanup()
 def change_speed(speed):
     print('Speed: ', speed)
     
@@ -82,16 +82,18 @@ while True:
     
     if command == 'w':
         forward()
-    if command == 'a':
+    elif command == 'a':
         left_turn()
-    if command == 's':
+    elif command == 's':
         reverse()
-    if command == 'd':
+    elif command == 'd':
         right_turn()
-    if command == 'l':
+    elif command == 'l':
         speed_command = input('Give speed (0 - 100): ')
         change_speed(int(speed_command))
-    
+    elif command == 'q':
+        gpio.cleanup()
+        exit()
     else:
         print('Bad command')
         exit()
