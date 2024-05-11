@@ -35,7 +35,7 @@ def forward(sec):
     gpio.output(p_in2, True)
     gpio.output(p_in3, True)
     gpio.output(p_in4, False)
-    time.sleep(sec)
+    # time.sleep(sec)
     gpio.cleanup() 
 def reverse(sec):
     print('reverse')
@@ -43,7 +43,7 @@ def reverse(sec):
     gpio.output(p_in2, False)
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
-    time.sleep(sec)
+    # time.sleep(sec)
     gpio.cleanup()
 def left_turn(sec):
     print('left')
@@ -51,7 +51,7 @@ def left_turn(sec):
     gpio.output(p_in2, False)
     gpio.output(p_in3, True)
     gpio.output(p_in4, False)
-    time.sleep(sec)
+    # time.sleep(sec)
     gpio.cleanup()
 def right_turn(sec):
     print('right')
@@ -59,13 +59,13 @@ def right_turn(sec):
     gpio.output(p_in2, True)
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
-    time.sleep(sec)
+    # time.sleep(sec)
     gpio.cleanup()
 def change_speed(speed):
-    print('speed:', speed)
+    print('Speed: ', speed)
     
-    # p_a.ChangeDutyCycle(speed)
-    # p_b.ChangeDutyCycle(speed)
+    p_a.ChangeDutyCycle(speed)
+    p_b.ChangeDutyCycle(speed)
 
 init()
 p_a = gpio.PWM(p_ena,100)
@@ -78,7 +78,7 @@ p_b.start(50)
 # p_b.ChangeDutyCycle(50)
 
 while True:
-    command = input('Give input:')
+    command = input('Give input: ')
     
     if command == 'w':
         forward(100)
