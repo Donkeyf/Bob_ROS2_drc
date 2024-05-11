@@ -20,6 +20,9 @@ import time
 # from gpiozero import Motor
 
 def init():    
+    
+    gpio.setwarnings(False) # The code is complaining too much
+    
     gpio.setmode(gpio.BCM)
     gpio.setup(p_in1, gpio.OUT)
     gpio.setup(p_in2, gpio.OUT)
@@ -86,7 +89,7 @@ while True:
     if command == 'd':
         right_turn()
     if command == 'l':
-        speed_command = input('Give speed (0 - 100):')
+        speed_command = input('Give speed (0 - 100): ')
         change_speed(int(speed_command))
     
     else:
