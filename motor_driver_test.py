@@ -50,18 +50,18 @@ def reverse():
     # gpio.cleanup()
 def left_turn():
     print('left')
-    gpio.output(p_in1, True)
-    gpio.output(p_in2, False)
-    gpio.output(p_in3, True)
-    gpio.output(p_in4, False)
-    # time.sleep(sec)
-    # gpio.cleanup()
-def right_turn():
-    print('right')
     gpio.output(p_in1, False)
     gpio.output(p_in2, True)
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
+    # time.sleep(sec)
+    # gpio.cleanup()
+def right_turn():
+    print('right')
+    gpio.output(p_in1, True)
+    gpio.output(p_in2, False)
+    gpio.output(p_in3, True)
+    gpio.output(p_in4, False)
     # time.sleep(sec)
     # gpio.cleanup()
 def change_speed(speed):
