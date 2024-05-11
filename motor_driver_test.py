@@ -96,4 +96,5 @@ while True:
         exit()
     else:
         print('Bad command')
+        gpio.cleanup()
         exit()
