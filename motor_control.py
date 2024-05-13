@@ -31,6 +31,12 @@ class MotorControl():
         gpio.setup(self.p_ena, gpio.OUT)
         gpio.setup(self.p_enb, gpio.OUT)
 
+        self.p_a = gpio.PWM(self.p_ena,100)
+        self.p_b = gpio.PWM(self.p_enb,100)
+
+        self.p_a.start(0)
+        self.p_b.start(0)
+
     def forward(self):
         print('forward')
         gpio.output(self.p_in1, False)
