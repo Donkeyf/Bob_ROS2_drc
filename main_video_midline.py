@@ -9,6 +9,10 @@ from contour_filters import contour_filter_4
 from midline_coords import midline_coords
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
+import warnings
+with warnings.catch_warnings():
+    warnings.filterwarnings('ignore', r'Polyfit may be poorly conditioned')
+
 # Colours are in HSV
 # Range is 0-180, 0-255, 0-255
 
@@ -17,8 +21,11 @@ yellow_max = (30, 255, 255)
 
 # Colour for dilon webcam
 
-pine_blue_min = (190, 30, 70)
-pine_blue_max = (205, 100, 100)
+# pine_blue_min = (190, 30, 70)
+# pine_blue_max = (205, 100, 100)
+
+pine_blue_min = (190, 30, 30)
+pine_blue_max = (215, 100, 100)
 
 # # Colour for mac cam
 
@@ -28,7 +35,7 @@ pine_blue_max = (205, 100, 100)
 blue_min = pinehsv_to_cvhsv(pine_blue_min)
 blue_max = pinehsv_to_cvhsv(pine_blue_max)
 
-capture = cv.VideoCapture(0)
+capture = cv.VideoCapture(1)
 capture.set(3, 128)
 capture.set(4, 96)
 
@@ -48,20 +55,31 @@ while True:
 
     # Colour is in BGR
 
-    blue_coords = midline_coords(frame_blue)
+    blue_coords, blue_angle, blue_x = midline_coords(frame_blue)
     if len(blue_coords) == 0:
         True
     else:
         for point1, point2 in zip(blue_coords, blue_coords[1:]): 
-            cv.line(frame, point1, point2, [0, 255, 255], 2) 
+            cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [0, 255, 255], 2) 
 
-    yellow_coords = midline_coords(frame_yellow)
+    yellow_coords, yellow_angle, yellow_x = midline_coords(frame_yellow)
     if len(yellow_coords) == 0:
         True
     else:
         for point1, point2 in zip(yellow_coords, yellow_coords[1:]): 
-            cv.line(frame, point1, point2, [255, 0, 0], 2) 
+            cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [255, 0, 0], 2) 
     
+    if (blue_angle != None) & (yellow_angle != None):
+        angle = (blue_angle + yellow_angle) / 2
+    elif (blue_angle == None) & (yellow_angle != None):
+        angle = yellow_angle
+    elif (blue_angle != None) & (yellow_angle == None):
+        angle = blue_angle
+    else:
+        angle = 0
+
+    print(angle, yellow_x, blue_x)
+
     cv.imshow('frame', frame)
     key = cv.waitKey(1)
 

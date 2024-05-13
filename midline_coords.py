@@ -7,12 +7,20 @@ def midline_coords(frame):
 
     frame = frame / 255
     found = 0
+
+    xs = []
+    ys = []
     
     # print(len(frame[0]))
     
     for index, row in enumerate(frame):
-
+        
         if sum(row) == 0:
+            continue
+
+        # Index counts from the bottom of the frame
+        
+        if index < 2/3 * len(frame):
             continue
 
         new_row = np.multiply(np.arange(len(row)),row)
@@ -35,7 +43,26 @@ def midline_coords(frame):
         # prev_index = index
         # found = 1
 
+        xs.append(midpoint)
+        ys.append(index)
+
     coords = np.array(coords, dtype=np.float64)
 
-    return coords
+    if len(xs) < 1:
+        angle = None
+        mid_x = None
+    else:
+        slope = -np.polyfit(xs,ys,1)[0]
+        angle = np.arctan(slope)
+
+        if slope > 0:
+            angle = np.pi/2 - angle
+        elif slope < 0:
+            angle = -np.pi/2 - angle
+
+        angle = angle * 180 / np.pi
+
+        mid_x = np.average(xs)
+
+    return coords, angle, mid_x
 
