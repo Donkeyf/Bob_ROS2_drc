@@ -20,7 +20,7 @@ def midline_coords(frame):
 
         # Index counts from the bottom of the frame
         
-        if index < 2/3 * len(frame):
+        if index < 1/2 * len(frame):
             continue
 
         new_row = np.multiply(np.arange(len(row)),row)
@@ -50,7 +50,7 @@ def midline_coords(frame):
 
     if len(xs) < 1:
         angle = None
-        mid_x = None
+        mid_x = 0
     else:
         slope = -np.polyfit(xs,ys,1)[0]
         angle = np.arctan(slope)
