@@ -66,9 +66,9 @@ while True:
     else:
         angle = 0
 
-    if (140 < blue_x < 160):
+    if (140 < blue_x < 160 or blue_x == None):
         mc.course_correction(True)
-    elif(160 < yellow_x < 180):
+    elif(160 < yellow_x < 180 or yellow_x == None):
         mc.course_correction(False)
     elif(angle < -10):
         mc.turn_left(angle)
