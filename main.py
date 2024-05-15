@@ -32,53 +32,56 @@ capture.set(4, 240)
 mc = MotorControl()
 mc.forward()
 
-while True:
-    mc.change_speed(default_speed)
-
-    retval, frame = capture.read() 
-
-    if not retval:
-        break
-    
-    blank_frame = np.zeros_like(frame)
-
-    frame_resize = frame
-    frame_blur = frame_resize
-    frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
-    frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
-
-    # Colour is in BGR
-
-    blue_coords, blue_angle, blue_x = midline_coords(frame_blue)
-    if len(blue_coords) == 0:
-        True
-    else:
-        for point1, point2 in zip(blue_coords, blue_coords[1:]): 
-            cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [0, 255, 255], 2) 
-
-    yellow_coords, yellow_angle, yellow_x = midline_coords(frame_yellow)
-    if len(yellow_coords) == 0:
-        True
-    else:
-        for point1, point2 in zip(yellow_coords, yellow_coords[1:]): 
-            cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [255, 0, 0], 2) 
-    
-    if (blue_angle != None) & (yellow_angle != None):
-        angle = (blue_angle + yellow_angle) / 2
-    elif (blue_angle == None) & (yellow_angle != None):
-        angle = yellow_angle
-    elif (blue_angle != None) & (yellow_angle == None):
-        angle = blue_angle
-    else:
-        angle = 0
-
-    if (140 < blue_x < 160):
-        mc.course_correction(True)
-    elif(160 < yellow_x < 180):
-        mc.course_correction(False)
-    elif(angle < -10):
-        mc.turn_left(angle)
-    elif(angle > 10):
-        mc.turn_right(angle)
-    else:
+try:
+    while True:
         mc.change_speed(default_speed)
+
+        retval, frame = capture.read() 
+
+        if not retval:
+            break
+        
+        blank_frame = np.zeros_like(frame)
+
+        frame_resize = frame
+        frame_blur = frame_resize
+        frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
+        frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
+
+        # Colour is in BGR
+
+        blue_coords, blue_angle, blue_x = midline_coords(frame_blue)
+        if len(blue_coords) == 0:
+            True
+        else:
+            for point1, point2 in zip(blue_coords, blue_coords[1:]): 
+                cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [0, 255, 255], 2) 
+
+        yellow_coords, yellow_angle, yellow_x = midline_coords(frame_yellow)
+        if len(yellow_coords) == 0:
+            True
+        else:
+            for point1, point2 in zip(yellow_coords, yellow_coords[1:]): 
+                cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [255, 0, 0], 2) 
+        
+        if (blue_angle != None) & (yellow_angle != None):
+            angle = (blue_angle + yellow_angle) / 2
+        elif (blue_angle == None) & (yellow_angle != None):
+            angle = yellow_angle
+        elif (blue_angle != None) & (yellow_angle == None):
+            angle = blue_angle
+        else:
+            angle = 0
+
+        if (140 < blue_x < 160):
+            mc.course_correction(True)
+        elif(160 < yellow_x < 180):
+            mc.course_correction(False)
+        elif(angle < -10):
+            mc.turn_left(angle)
+        elif(angle > 10):
+            mc.turn_right(angle)
+        else:
+            mc.change_speed(default_speed)
+except KeyboardInterrupt:
+    mc.stop()
