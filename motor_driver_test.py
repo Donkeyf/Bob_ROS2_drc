@@ -1,17 +1,17 @@
 # Pins: 
 
-# 27 - In 1 - Motor 1 - Green
+# 27 - In 1 - Motor 1 - Green - Left
 p_in1 = 27
-# 17 - In 2 - Motor 1 - Yellow
+# 17 - In 2 - Motor 1 - Yellow - Left
 p_in2 = 17
-# 24 - In 3 - Motor 2 - White furthest from green
+# 24 - In 3 - Motor 2 - White furthest from green - Right
 p_in3 = 24
-# 23 - In 4 - Motor 2 - White closest to green
+# 23 - In 4 - Motor 2 - White closest to green - Right
 p_in4 = 23
 
 # 13 (pwm) - ENA - Motor 1 - Blue
 p_ena = 13
-# 12 (pwm) - ENB - Motor 2 - Purple
+# 12 (pwm) - ENB - Motor 2 - Purple 
 p_enb = 12
 
 import RPi.GPIO as gpio
@@ -48,15 +48,15 @@ def reverse():
     gpio.output(p_in4, True)
     # time.sleep(sec)
     # gpio.cleanup()
-def left_turn():
+def right_turn():
     print('left')
-    gpio.output(p_in1, True)
+    gpio.output(p_in1, False)
     gpio.output(p_in2, False)
-    gpio.output(p_in3, False)
+    gpio.output(p_in3, True)
     gpio.output(p_in4, False)
     # time.sleep(sec)
     # gpio.cleanup()
-def right_turn():
+def left_turn():
     print('right')
     gpio.output(p_in1, False)
     gpio.output(p_in2, True)
