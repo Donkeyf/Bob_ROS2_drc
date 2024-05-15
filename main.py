@@ -11,7 +11,7 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
 
-default_speed = 100
+default_speed = 60
 
 pine_yellow_min = (45, 20, 60)
 pine_yellow_max = (55, 100, 100)
