@@ -1,6 +1,7 @@
 import RPi.GPIO as gpio
 import time
 
+default_speed = 40
 
 class MotorControl():
     def __init__(self):
@@ -31,26 +32,43 @@ class MotorControl():
         gpio.setup(self.p_ena, gpio.OUT)
         gpio.setup(self.p_enb, gpio.OUT)
 
-        self.p_a = gpio.PWM(self.p_ena,100)
-        self.p_b = gpio.PWM(self.p_enb,100)
+        self.p_a = gpio.PWM(self.p_ena,default_speed)
+        self.p_b = gpio.PWM(self.p_enb,default_speed)
 
         self.p_a.start(0)
         self.p_b.start(0)
 
-    def forward(self):
-        print('forward')
-        gpio.output(self.p_in1, False)
-        gpio.output(self.p_in2, True)
-        gpio.output(self.p_in3, True)
-        gpio.output(self.p_in4, False)
+    # def forward(self):
+    #     print('forward')
+    #     gpio.output(self.p_in1, False)
+    #     gpio.output(self.p_in2, True)
+    #     gpio.output(self.p_in3, True)
+    #     gpio.output(self.p_in4, False)
  
 
-    def reverse(self):
-        print('reverse')
+    # def reverse(self):
+    #     print('reverse')
+    #     gpio.output(self.p_in1, True)
+    #     gpio.output(self.p_in2, False)
+    #     gpio.output(self.p_in3, False)
+    #     gpio.output(self.p_in4, True)    
+
+    def forward(self):
+        print('forward')
         gpio.output(self.p_in1, True)
         gpio.output(self.p_in2, False)
+        gpio.output(self.p_in3, True)
+        gpio.output(self.p_in4, False)
+        # time.sleep(sec)
+        # gpio.cleanup() 
+    def reverse(self):
+        print('reverse')
+        gpio.output(self.p_in1, False)
+        gpio.output(self.p_in2, True)
         gpio.output(self.p_in3, False)
-        gpio.output(self.p_in4, True)    
+        gpio.output(self.p_in4, True)
+        # time.sleep(sec)
+        # gpio.cleanup()
 
 
     def change_speed(self, pwm):
@@ -61,8 +79,9 @@ class MotorControl():
 
 
     def turn_right(self, angle):
-        speed = 1 - (-angle / 90) * 100
-        print(speed)
+        print('right')
+        speed = 1 - (-angle / 90) * default_speed
+        # print(speed)
         self.p_a.ChangeDutyCycle(100)
         self.p_b.ChangeDutyCycle(speed)
         time.sleep(0.1)
@@ -70,8 +89,9 @@ class MotorControl():
 
 
     def turn_left(self, angle):
-        speed = 1 - (angle / 90) * 100
-        print(speed)
+        print('left')
+        speed = 1 - (angle / 90) * default_speed
+        # print(speed)
         self.p_a.ChangeDutyCycle(speed)
         self.p_b.ChangeDutyCycle(100)
         time.sleep(0.1)
