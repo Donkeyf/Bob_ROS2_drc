@@ -13,11 +13,11 @@ from motor_control import MotorControl
 
 default_speed = 40
 
-pine_yellow_min = (65, 5, 60)
-pine_yellow_max = (80, 20, 100)
+pine_yellow_min = (45, 20, 60)
+pine_yellow_max = (55, 100, 100)
 
-pine_blue_min = (190, 30, 30)
-pine_blue_max = (215, 100, 100)
+pine_blue_min = (195, 60, 60)
+pine_blue_max = (210, 100, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
