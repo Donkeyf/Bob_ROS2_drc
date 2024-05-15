@@ -49,7 +49,7 @@ def reverse():
     # time.sleep(sec)
     # gpio.cleanup()
 def right_turn():
-    print('left')
+    print('right')
     gpio.output(p_in1, False)
     gpio.output(p_in2, False)
     gpio.output(p_in3, True)
@@ -57,9 +57,9 @@ def right_turn():
     # time.sleep(sec)
     # gpio.cleanup()
 def left_turn():
-    print('right')
-    gpio.output(p_in1, False)
-    gpio.output(p_in2, True)
+    print('left')
+    gpio.output(p_in1, True)
+    gpio.output(p_in2, False)
     gpio.output(p_in3, False)
     gpio.output(p_in4, False)
     # time.sleep(sec)
