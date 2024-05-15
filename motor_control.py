@@ -72,7 +72,7 @@ class MotorControl():
 
 
     def change_speed(self, pwm):
-        print('Speed: ', pwm)
+        # print('Speed: ', pwm)
         
         self.p_a.ChangeDutyCycle(pwm)
         self.p_b.ChangeDutyCycle(pwm)
