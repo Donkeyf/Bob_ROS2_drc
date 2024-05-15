@@ -11,6 +11,8 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
 
+default_speed = 40
+
 pine_yellow_min = (65, 5, 60)
 pine_yellow_max = (80, 20, 100)
 
@@ -31,7 +33,7 @@ mc = MotorControl()
 mc.forward()
 
 while True:
-    mc.change_speed(100)
+    mc.change_speed(default_speed)
 
     retval, frame = capture.read() 
 
@@ -79,4 +81,4 @@ while True:
     elif(angle > 10):
         mc.turn_right(angle)
     else:
-        mc.change_speed(100)
+        mc.change_speed(default_speed)
