@@ -16,8 +16,14 @@ with warnings.catch_warnings():
 # Colours are in HSV
 # Range is 0-180, 0-255, 0-255
 
-yellow_min = (20, 100, 100)
-yellow_max = (30, 255, 255)
+pine_yellow_min = (40, 10, 60)
+pine_yellow_max = (60, 20, 100)
+
+yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
+yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
+
+# yellow_min = (20, 100, 100)
+# yellow_max = (30, 255, 255)
 
 # Colour for dilon webcam
 
@@ -25,7 +31,7 @@ yellow_max = (30, 255, 255)
 # pine_blue_max = (205, 100, 100)
 
 pine_blue_min = (190, 30, 30)
-pine_blue_max = (215, 100, 100)
+pine_blue_max = (205, 100, 100)
 
 # # Colour for mac cam
 
@@ -35,7 +41,7 @@ pine_blue_max = (215, 100, 100)
 blue_min = pinehsv_to_cvhsv(pine_blue_min)
 blue_max = pinehsv_to_cvhsv(pine_blue_max)
 
-capture = cv.VideoCapture(1)
+capture = cv.VideoCapture(0)
 capture.set(3, 128)
 capture.set(4, 96)
 
