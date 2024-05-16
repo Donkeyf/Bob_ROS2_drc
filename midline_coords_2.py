@@ -23,7 +23,7 @@ def midline_coords(frame):
 
         # Index counts from the bottom of the frame
         
-        if index < 1/2 * len(frame):
+        if index < 2/3 * len(frame):
             continue
         
         new_row = np.multiply(np.arange(len(row)),row)
