@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 
-default_speed = 20
+default_speed = 35
 
 class MotorControl():
     def __init__(self):
@@ -79,7 +79,7 @@ class MotorControl():
 
 
     def turn_right(self, angle):
-        speed = 1 - (-angle / 90) * default_speed
+        speed = (1 - (-angle / 90)) * default_speed
         print("right", speed)
 
         self.p_a.ChangeDutyCycle(100)
@@ -89,7 +89,7 @@ class MotorControl():
 
 
     def turn_left(self, angle):
-        speed = 1 - (angle / 90) * default_speed
+        speed = (1 - (angle / 90)) * default_speed
         print("left", speed)
         self.p_a.ChangeDutyCycle(int(speed))
         self.p_b.ChangeDutyCycle(100)
