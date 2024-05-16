@@ -13,11 +13,11 @@ from motor_control import MotorControl
 
 default_speed = 40
 
-pine_yellow_min = (45, 20, 60)
-pine_yellow_max = (55, 100, 100)
+pine_yellow_min = (30, 10, 60)
+pine_yellow_max = (60, 100, 100)
 
-pine_blue_min = (195, 60, 60)
-pine_blue_max = (210, 100, 100)
+pine_blue_min = (195, 30, 60)
+pine_blue_max = (220, 100, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
@@ -73,9 +73,9 @@ try:
         else:
             angle = 0
 
-        if (140 < blue_x < 160):
+        if (140 < yellow_x < 160):
             mc.course_correction(True)
-        elif(160 < yellow_x < 180):
+        elif(160 < blue_x < 180):
             mc.course_correction(False)
         elif(angle < -10):
             mc.turn_left(angle)
