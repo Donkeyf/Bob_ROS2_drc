@@ -11,6 +11,8 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
 
+import pickle
+
 default_speed = 20
 
 pine_yellow_min = (45, 10, 60)
@@ -32,11 +34,21 @@ capture.set(4, 240)
 mc = MotorControl()
 mc.forward()
 
+with open("calibration/camera_matrix.pkl", 'rb') as f:
+    K = pickle.load(f)
+
+with open("calibration/distortion_coefficients.pkl", 'rb') as f:
+    D = pickle.load(f) 
+
 try:
     while True:
         mc.change_speed(default_speed)
 
         retval, frame = capture.read() 
+
+        newmtx = cv.getOptimalNewCameraMatrix(K, D, (320, 240), 1, (320, 240))
+        frame = cv.undistort(frame, K, D, None, newmtx)
+
 
         if not retval:
             break
@@ -80,11 +92,11 @@ try:
         print(angle)
 
 
-        if (140 < yellow_x < 160 and not steep_angley):
+        if (yellow_x < 160 and not steep_angley):
             print("too close to yellow")
             mc.course_correction(True)
 
-        elif(160 < blue_x < 180 and not steep_angleb):
+        elif(160 < blue_x and not steep_angleb):
             mc.course_correction(False)
             print("too close to blue")
         elif(angle < -10):
