@@ -92,14 +92,14 @@ try:
         print(angle)
 
 
-        if (yellow_x > 160 and not steep_angley and angle ):
-            print("too close to yellow")
-            mc.course_correction(True)
+        # if (yellow_x > 160 and not steep_angley and angle ):
+        #     print("too close to yellow")
+        #     mc.course_correction(True)
 
-        elif(160 < blue_x and not steep_angleb):
-            mc.course_correction(False)
-            print("too close to blue")
-        elif(angle < -10):
+        # elif(160 < blue_x and not steep_angleb):
+        #     mc.course_correction(False)
+        #     print("too close to blue")
+        if(angle < -10):
             mc.turn_left(angle)
         elif(angle > 10):
             mc.turn_right(angle)
