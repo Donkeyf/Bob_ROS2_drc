@@ -71,8 +71,7 @@ def midline_coords(frame):
 
             mid_x = np.average(xs)
 
-        print(angle)
-        return coords, angle, mid_x
+        return coords, angle, mid_x, False
     
     
     frame_t = frame.T
@@ -132,5 +131,4 @@ def midline_coords(frame):
 
         mid_x = np.average(xs)
 
-    print(angle)
-    return coords, angle, mid_x
+    return coords, angle, mid_x, True
