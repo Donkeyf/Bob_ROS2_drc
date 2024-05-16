@@ -78,8 +78,6 @@ try:
             angle = -blue_angle
 
         print(angle)
-        print(steep_angleb)
-        print(steep_angley)
 
 
         if (140 < yellow_x < 160 and not steep_angley):
