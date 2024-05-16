@@ -55,18 +55,18 @@ class MotorControl():
 
     def forward(self):
         print('forward')
-        gpio.output(self.p_in1, True)
-        gpio.output(self.p_in2, False)
-        gpio.output(self.p_in3, True)
-        gpio.output(self.p_in4, False)
-        # time.sleep(sec)
-        # gpio.cleanup() 
-    def reverse(self):
-        print('reverse')
         gpio.output(self.p_in1, False)
         gpio.output(self.p_in2, True)
         gpio.output(self.p_in3, False)
         gpio.output(self.p_in4, True)
+        # time.sleep(sec)
+        # gpio.cleanup() 
+    def reverse(self):
+        print('reverse')
+        gpio.output(self.p_in1, True)
+        gpio.output(self.p_in2, False)
+        gpio.output(self.p_in3, True)
+        gpio.output(self.p_in4, False)
         # time.sleep(sec)
         # gpio.cleanup()
 
