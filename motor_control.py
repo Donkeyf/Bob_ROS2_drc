@@ -103,8 +103,9 @@ class MotorControl():
         if bound:
             self.p_a.ChangeDutyCycle(100)
             self.p_b.ChangeDutyCycle(50)
-            time.sleep(0.1)
+            time.sleep(0.05)
             self.p_b.ChangeDutyCycle(100)
+
 
 
 
@@ -112,7 +113,7 @@ class MotorControl():
         else:
             self.p_a.ChangeDutyCycle(50)
             self.p_b.ChangeDutyCycle(100)
-            time.sleep(0.1)
+            time.sleep(0.05)
             self.p_a.ChangeDutyCycle(100)
 
 
