@@ -34,21 +34,12 @@ capture.set(4, 240)
 mc = MotorControl()
 mc.forward()
 
-with open("calibration/camera_matrix.pkl", 'rb') as f:
-    K = pickle.load(f)
-
-with open("calibration/distortion_coefficients.pkl", 'rb') as f:
-    D = pickle.load(f) 
 
 try:
     while True:
         mc.change_speed(default_speed)
 
         retval, frame = capture.read() 
-
-        newmtx, _ = cv.getOptimalNewCameraMatrix(K, D, (320, 240), 1, (320, 240))
-        frame = cv.undistort(frame, K, D, None, newmtx)
-
 
         if not retval:
             break

@@ -102,19 +102,18 @@ class MotorControl():
         #if approaching left line
         if bound:
             self.p_a.ChangeDutyCycle(100)
-            self.p_b.ChangeDutyCycle(90)
+            self.p_b.ChangeDutyCycle(50)
             time.sleep(0.1)
             self.p_b.ChangeDutyCycle(100)
-            time.sleep(0.5)
+
 
 
         #if approaching right line
         else:
-            self.p_a.ChangeDutyCycle(90)
+            self.p_a.ChangeDutyCycle(50)
             self.p_b.ChangeDutyCycle(100)
             time.sleep(0.1)
             self.p_a.ChangeDutyCycle(100)
-            time.sleep(0.5)
 
 
     def stop(self):
