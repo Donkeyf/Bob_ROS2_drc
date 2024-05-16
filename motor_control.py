@@ -79,7 +79,7 @@ class MotorControl():
 
 
     def turn_right(self, angle):
-        factor =  default_speed * 0.3
+        factor =  default_speed * 0.8
         if angle < 45:
             speed = (1 - (-angle / 90)) * factor
         else:
@@ -93,7 +93,7 @@ class MotorControl():
 
 
     def turn_left(self, angle):
-        factor =  default_speed * 0.3
+        factor =  default_speed * 0.8
         if angle < 45:
             speed = (1 - (angle / 90)) * factor
         else:
