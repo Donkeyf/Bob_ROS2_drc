@@ -48,8 +48,8 @@ try:
 
         frame_resize = frame
         frame_blur = frame_resize
-        frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
-        frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
+        frame_blue = colour_filter(frame_blur, blue_min, blue_max, 11, 11, 0)
+        frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 11, 11, 0)
 
         # Colour is in BGR
 
