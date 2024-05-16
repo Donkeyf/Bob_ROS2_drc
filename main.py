@@ -73,6 +73,8 @@ try:
         else:
             angle = 0
 
+        print(angle)
+
         if (140 < yellow_x < 160):
             mc.course_correction(True)
         elif(160 < blue_x < 180):
