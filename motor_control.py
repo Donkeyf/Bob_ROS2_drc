@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 
-default_speed = 30
+default_speed = 15
 
 class MotorControl():
     def __init__(self):
