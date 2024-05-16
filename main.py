@@ -46,7 +46,7 @@ try:
 
         retval, frame = capture.read() 
 
-        newmtx = cv.getOptimalNewCameraMatrix(K, D, (320, 240), 1, (320, 240))
+        newmtx, _ = cv.getOptimalNewCameraMatrix(K, D, (320, 240), 1, (320, 240))
         frame = cv.undistort(frame, K, D, None, newmtx)
 
 
