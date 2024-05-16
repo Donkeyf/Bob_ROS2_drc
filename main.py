@@ -15,11 +15,11 @@ import pickle
 
 default_speed = 20
 
-pine_yellow_min = (20, 5, 60)
+pine_yellow_min = (0, 0, 60)
 pine_yellow_max = (60, 100, 100)
 
-pine_blue_min = (195, 30, 60)
-pine_blue_max = (220, 100, 100)
+pine_blue_min = (180, 10, 60)
+pine_blue_max = (210, 100, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
