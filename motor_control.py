@@ -81,8 +81,9 @@ class MotorControl():
     def turn_right(self, angle):
         speed = 1 - (-angle / 90) * default_speed
         print("right", speed)
+
         self.p_a.ChangeDutyCycle(100)
-        self.p_b.ChangeDutyCycle(speed)
+        self.p_b.ChangeDutyCycle(int(speed))
         time.sleep(1)
         self.p_b.ChangeDutyCycle(100)
 
@@ -90,7 +91,7 @@ class MotorControl():
     def turn_left(self, angle):
         speed = 1 - (angle / 90) * default_speed
         print("left", speed)
-        self.p_a.ChangeDutyCycle(speed)
+        self.p_a.ChangeDutyCycle(int(speed))
         self.p_b.ChangeDutyCycle(100)
         time.sleep(1)
         self.p_a.ChangeDutyCycle(100)
