@@ -86,10 +86,10 @@ class MotorControl():
             speed = (1-(-angle/90)) * 2*factor -factor/2
     
 
-        self.p_a.ChangeDutyCycle(100)
+        self.p_a.ChangeDutyCycle(20)
         self.p_b.ChangeDutyCycle(int(speed))
         time.sleep(0.07)
-        self.p_b.ChangeDutyCycle(100)
+        self.p_b.ChangeDutyCycle(20)
 
 
     def turn_left(self, angle):
@@ -102,9 +102,9 @@ class MotorControl():
 
         print("left", speed)
         self.p_a.ChangeDutyCycle(int(speed))
-        self.p_b.ChangeDutyCycle(100)
+        self.p_b.ChangeDutyCycle(20)
         time.sleep(0.07)
-        self.p_a.ChangeDutyCycle(100)
+        self.p_a.ChangeDutyCycle(20)
     
 
 
