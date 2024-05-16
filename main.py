@@ -6,7 +6,7 @@ from colour_filter import colour_filter
 from get_contours import get_contours
 from contour_filters import contour_filter_4
 
-from midline_coords import midline_coords
+from midline_coords_2 import midline_coords
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
