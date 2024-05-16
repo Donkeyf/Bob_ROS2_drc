@@ -84,7 +84,7 @@ class MotorControl():
         # print(speed)
         self.p_a.ChangeDutyCycle(100)
         self.p_b.ChangeDutyCycle(speed)
-        time.sleep(0.05)
+        time.sleep(0.1)
         self.p_b.ChangeDutyCycle(100)
 
 
@@ -94,7 +94,7 @@ class MotorControl():
         # print(speed)
         self.p_a.ChangeDutyCycle(speed)
         self.p_b.ChangeDutyCycle(100)
-        time.sleep(0.05)
+        time.sleep(0.1)
         self.p_a.ChangeDutyCycle(100)
     
 
