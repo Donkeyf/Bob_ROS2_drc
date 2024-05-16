@@ -10,7 +10,7 @@ def midline_coords(frame):
     xs = []
     ys = []
 
-    threshold = 200
+    threshold = 100
     trigger_y = False
     
     # print(len(frame[0]))
