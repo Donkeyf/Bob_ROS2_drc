@@ -64,6 +64,8 @@ try:
             for point1, point2 in zip(yellow_coords, yellow_coords[1:]): 
                 cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [255, 0, 0], 2) 
         
+        blue_angle = - blue_angle
+
         if (blue_angle != None) & (yellow_angle != None):
             angle = (blue_angle + yellow_angle) / 2
         elif (blue_angle == None) & (yellow_angle != None):

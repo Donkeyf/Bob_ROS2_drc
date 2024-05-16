@@ -127,7 +127,7 @@ def midline_coords(frame):
         elif slope < 0:
             angle = -np.pi/2 - angle
 
-        angle = -angle * 180 / np.pi
+        angle = np.absolute(angle * 180 / np.pi)
 
         mid_x = np.average(xs)
 
