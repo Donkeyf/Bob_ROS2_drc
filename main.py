@@ -13,7 +13,7 @@ from motor_control import MotorControl
 
 import pickle
 
-default_speed = 20
+default_speed = 40
 
 pine_yellow_min = (45, 10, 60)
 pine_yellow_max = (60, 100, 100)
