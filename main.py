@@ -50,7 +50,7 @@ try:
 
         # Colour is in BGR
 
-        blue_coords, blue_angle, blue_x = midline_coords(frame_blue)
+        blue_coords, blue_angle, blue_x, steep_angle = midline_coords(frame_blue)
         if len(blue_coords) == 0:
             True
         else:
@@ -73,11 +73,10 @@ try:
         else:
             angle = 0
 
-        print(angle)
 
-        if (140 < yellow_x < 160):
+        if (140 < yellow_x < 160 and not steep_angle):
             mc.course_correction(True)
-        elif(160 < blue_x < 180):
+        elif(160 < blue_x < 180 and not steep_angle):
             mc.course_correction(False)
         elif(angle < -10):
             mc.turn_left(angle)
