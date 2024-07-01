@@ -136,6 +136,21 @@ class MotorControl():
         gpio.cleanup()
 
 
+# def turn(angle):
+#         if (angle > -5 and angle < 5):
+#             mc.forward()
+#         elif (angle > 5 and angle < 15):
+#             mc.med_right()
+#         elif (angle >= 15 and angle < 15):
+#             mc.hard_right()
+#         elif (angle > 25):
+#             mc.hard_right()
+#         elif (angle < 5 and angle > -15):
+#             mc.med_left()
+#         elif (angle <= -15 and angle > -25):
+#             mc.hard_left()
+#         elif (angle < -25):
+#             mc.hard_left()
 
 
 

@@ -81,20 +81,21 @@ try:
             angle = -blue_angle
 
         print(angle)
+        
+        if (angle > -5 and angle < 5):
+            mc.forward()
+        elif (angle > 5 and angle < 15):
+            mc.med_right()
+        elif (angle >= 15 and angle < 15):
+            mc.hard_right()
+        elif (angle > 25):
+            mc.hard_right()
+        elif (angle < 5 and angle > -15):
+            mc.med_left()
+        elif (angle <= -15 and angle > -25):
+            mc.hard_left()
+        elif (angle < -25):
+            mc.hard_left()
 
-
-            print("too close to yello        if (yellow_x > 160 and not steep_angley and angle ):
-w")
-            mc.course_correction(True)
-
-        elif(160 < blue_x and not steep_angleb):
-            mc.course_correction(False)
-            print("too close to blue")
-        elif(angle < -10):
-            mc.turn_left(angle)
-        elif(angle > 10):
-            mc.turn_right(angle)
-        else:
-            mc.change_speed(default_speed)
 except KeyboardInterrupt:
     mc.stop()
