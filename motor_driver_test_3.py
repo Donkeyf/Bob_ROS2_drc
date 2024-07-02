@@ -113,12 +113,12 @@ def Right_soft():
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(1)
+    time.sleep(1 / global_multiplier)
 
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(0.2)
+    time.sleep(0.2 / global_multiplier)
 
 def Right_medium():
     print('right medium')
@@ -132,12 +132,12 @@ def Left_soft():
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(1)
+    time.sleep(1 / global_multiplier)
 
     setpins('tfft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(0.2)
+    time.sleep(0.2 / global_multiplier)
 
 def Left_medium():
     print('left medium')
@@ -149,54 +149,54 @@ def Object():
     print('object')
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
     
     setpins('tfft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1.1)
+    time.sleep(1.1 / global_multiplier)
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
 
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1)
+    time.sleep(1 / global_multiplier)
 
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1)
+    time.sleep(1 / global_multiplier)
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
 
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1.4)
+    time.sleep(1.4 / global_multiplier)
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
 
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1.4)
+    time.sleep(1.4 / global_multiplier)
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
 
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.8)
+    time.sleep(0.8 / global_multiplier)
 
     setspeed(0, 0)
-    time.sleep(0.4)
+    time.sleep(0.4 / global_multiplier)
 
     setpins('tfft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(1)
+    time.sleep(1 / global_multiplier)
 
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.2)
+    time.sleep(0.2 / global_multiplier)
 
 
 init()
