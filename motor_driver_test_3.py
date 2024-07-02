@@ -120,6 +120,9 @@ def Right_soft():
 
     time.sleep(0.2 / 5 / global_multiplier)
 
+    setpins('ftft')
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+
 def Right_medium():
     print('right medium')
 
