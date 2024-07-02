@@ -59,6 +59,10 @@ def setpins(pin_input):
     elif pin_input[3] == 't':
         gpio.output(p_in4, True)
 
+def setspeed(speed_a, speed_b):
+    p_a.ChangeDutyCycle(speed_a)
+    p_b.ChangeDutyCycle(speed_b)
+
 # Forward 
 def Forward():
     
@@ -71,60 +75,126 @@ def Forward():
     # gpio.output(p_in3, False)
     # gpio.output(p_in4, True)
 
-    change_speed_a(100)
-    change_speed_b(100)
+    setspeed(100, 100)
 
 # Backward 
 def Backward():
     print('backward')
-    gpio.output(p_in1, True)
-    gpio.output(p_in2, False)
-    gpio.output(p_in3, True)
-    gpio.output(p_in4, False)
 
-    change_speed_a(100)
-    change_speed_b(100)
+    setpins('tftf')
+    setspeed(100, 100)
 
 # Right
 def Right():
     print('right')
-    gpio.output(p_in1, False)
-    gpio.output(p_in2, True)
-    gpio.output(p_in3, True)
-    gpio.output(p_in4, False)
 
-    change_speed_a(100)
-    change_speed_b(0)
+    setpins('fttf')
+    setspeed(100, 0)
 
 # Left
 def Left():
     print('left')
-    gpio.output(p_in1, False)
-    gpio.output(p_in2, True)
-    gpio.output(p_in3, False)
-    gpio.output(p_in4, True)
 
-    change_speed_a(0)
-    change_speed_b(100)
+    setpins('ftft')
+    setspeed(0, 100)
 
 def Stop():
     print('stop')
 
-    gpio.output(p_in1, True)
-    gpio.output(p_in2, False)
-    gpio.output(p_in3, True)
-    gpio.output(p_in4, False)
-
-    change_speed_a(0)
-    change_speed_b(0)
+    setpins('tftf')
+    setspeed(0, 0)
 
 def Right_soft():
     print('right soft')
 
-    gpio.output(p_in1, False)
-    gpio.output(p_in2, True)
-    gpio.output(p_in3, False)
-    gpio.output(p_in4, True)
+    setpins('ftft')
+    setspeed(100, 100)
+
+    time.sleep(1)
+
+    setpins('fttf')
+    setspeed(100, 100)
+
+    time.sleep(0.2)
+
+def Right_medium():
+    print('right medium')
+
+    setpins('ftft')
+    setspeed(66, 100)
+
+def Left_soft():
+    print('left soft')
+
+    setpins('ftft')
+    setspeed(100, 100)
+
+    time.sleep(1)
+
+    setpins('tfft')
+    setspeed(100, 100)
+
+    time.sleep(0.2)
+
+def Left_medium():
+    print('left medium')
+
+    setpins('ftft')
+    setspeed(100, 66)
+
+def Object():
+    print('object')
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+    
+    setpins('tfft')
+    setspeed(100, 100)
+    time.sleep(1.1)
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+
+    setpins('ftft')
+    setspeed(100, 100)
+    time.sleep(1)
+
+    setpins('fttf')
+    setspeed(100, 100)
+    time.sleep(1)
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+
+    setpins('ftft')
+    setspeed(100, 100)
+    time.sleep(1.4)
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+
+    setpins('fttf')
+    setspeed(100, 100)
+    time.sleep(1.4)
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+
+    setpins('ftft')
+    setspeed(100, 100)
+    time.sleep(0.8)
+
+    setspeed(0, 0)
+    time.sleep(0.4)
+
+    setpins('tfft')
+    setspeed(100, 100)
+    time.sleep(1)
+
+    setpins('ftft')
+    setspeed(100, 100)
+    time.sleep(0.2)
+
 
 init()
 p_a = gpio.PWM(p_ena,100)
@@ -133,19 +203,32 @@ p_b = gpio.PWM(p_enb,100)
 p_a.start(0)
 p_b.start(0)
 
+change_speed_a(0)
+change_speed_b(0)
+
 while True:
     command = input('Give input: ')
     
-    if command == 'w':
+    if command == 't':
         Forward()
-    elif command == 'a':
-        Left()
-    elif command == 's':
-        Backward()
-    elif command == 'd':
-        Right()
     elif command == 'f':
+        Left()
+    elif command == 'g':
+        Backward()
+    elif command == 'h':
+        Right()
+    elif command == 'a':
         Stop()
+    elif command == 'd':
+        Left_soft()
+    elif command == 's':
+        Left_medium()
+    elif command == 'j':
+        Right_soft()
+    elif command == 'k':
+        Right_medium()
+    elif command == 'o':
+        Object()
     elif command == 'l':
         speed_command = input('Give speed (0 - 100): ')
         change_speed_a(int(speed_command))
