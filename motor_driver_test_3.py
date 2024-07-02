@@ -205,7 +205,7 @@ def Object():
     # Left
     setpins('tfft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.8 / 5 / global_multiplier) # 1
+    time.sleep(0.4 / 5 / global_multiplier) # 1
 
     # Forward
     setpins('ftft')
