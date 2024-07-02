@@ -239,7 +239,7 @@ while True:
         speed_command = input('Give speed (0 - 100): ')
         change_speed_b(int(speed_command))
     elif command == 'm':
-        global_multiplier = float('Give multiplier (0 - 1): ')
+        global_multiplier = float(input('Give multiplier (0 - 1): '))
     elif command == 'q':
         gpio.cleanup()
         exit()
