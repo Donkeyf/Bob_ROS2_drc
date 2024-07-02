@@ -173,7 +173,7 @@ def Object():
     # Right
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.4 / 5 / global_multiplier) # 1
+    time.sleep(0.5 / 5 / global_multiplier) # 1
 
     setspeed(0, 0)
     time.sleep(0.4 / 5 / global_multiplier)
@@ -189,7 +189,7 @@ def Object():
     # Right
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.4 / 5 / global_multiplier) # 1.4
+    time.sleep(0.5 / 5 / global_multiplier) # 1.4
 
     setspeed(0, 0)
     time.sleep(0.4 / 5 / global_multiplier)
@@ -205,7 +205,7 @@ def Object():
     # Left
     setpins('tfft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
-    time.sleep(0.6 / 5 / global_multiplier) # 1
+    time.sleep(0.5 / 5 / global_multiplier) # 1
 
     # Forward
     setpins('ftft')
