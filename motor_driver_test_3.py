@@ -127,7 +127,7 @@ def Right_medium():
     print('right medium')
 
     setpins('ftft')
-    setspeed(int(0.66 * global_multiplier * max_speed), global_multiplier * max_speed)
+    setspeed(global_multiplier * max_speed, int(0.66 * global_multiplier * max_speed))
 
 def Left_soft():
     print('left soft')
@@ -142,11 +142,14 @@ def Left_soft():
 
     time.sleep(0.2 / 5 / global_multiplier)
 
+    setpins('ftft')
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+
 def Left_medium():
     print('left medium')
 
     setpins('ftft')
-    setspeed(global_multiplier * max_speed, int(0.66 * global_multiplier * max_speed))
+    setspeed(int(0.66 * global_multiplier * max_speed), global_multiplier * max_speed)
 
 def Object():
     print('object')
