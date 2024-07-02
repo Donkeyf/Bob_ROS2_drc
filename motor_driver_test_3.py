@@ -78,7 +78,7 @@ def left():
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
 
-    change_speed_a(100)
+    change_speed_a(0)
     change_speed_b(100)
 
 init()
