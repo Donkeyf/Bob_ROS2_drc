@@ -15,7 +15,7 @@ p_ena = 13
 p_enb = 12
 
 max_speed = 100
-global_multiplier = 0.5
+global_multiplier = 0.4
 
 import RPi.GPIO as gpio
 import time
@@ -113,12 +113,12 @@ def Right_soft():
     setpins('ftft')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(1 / global_multiplier)
+    time.sleep(1 / 5 / global_multiplier)
 
     setpins('fttf')
     setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
-    time.sleep(0.2 / global_multiplier)
+    time.sleep(0.2 / 5 / global_multiplier)
 
 def Right_medium():
     print('right medium')
