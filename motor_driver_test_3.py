@@ -37,19 +37,45 @@ def change_speed_b(speed):
     # print('Speed b: ', speed)
     p_b.ChangeDutyCycle(speed)
 
+def setpins(pin_input):
+
+    if pin_input[0] == 'f':
+        gpio.output(p_in1, False)
+    elif pin_input[0] == 't':
+        gpio.output(p_in1, True)
+
+    if pin_input[1] == 'f':
+        gpio.output(p_in2, False)
+    elif pin_input[1] == 't':
+        gpio.output(p_in2, True)
+
+    if pin_input[2] == 'f':
+        gpio.output(p_in3, False)
+    elif pin_input[2] == 't':
+        gpio.output(p_in3, True)
+
+    if pin_input[3] == 'f':
+        gpio.output(p_in4, False)
+    elif pin_input[3] == 't':
+        gpio.output(p_in4, True)
+
 # Forward 
-def forward():
+def Forward():
+    
     print('forward')
-    gpio.output(p_in1, False)
-    gpio.output(p_in2, True)
-    gpio.output(p_in3, False)
-    gpio.output(p_in4, True)
+
+    setpins('ftft')
+
+    # gpio.output(p_in1, False)
+    # gpio.output(p_in2, True)
+    # gpio.output(p_in3, False)
+    # gpio.output(p_in4, True)
 
     change_speed_a(100)
     change_speed_b(100)
 
 # Backward 
-def backward():
+def Backward():
     print('backward')
     gpio.output(p_in1, True)
     gpio.output(p_in2, False)
@@ -60,7 +86,7 @@ def backward():
     change_speed_b(100)
 
 # Right
-def right():
+def Right():
     print('right')
     gpio.output(p_in1, False)
     gpio.output(p_in2, True)
@@ -71,15 +97,34 @@ def right():
     change_speed_b(0)
 
 # Left
-def left():
+def Left():
     print('left')
     gpio.output(p_in1, False)
-    gpio.output(p_in2, False)
+    gpio.output(p_in2, True)
     gpio.output(p_in3, False)
     gpio.output(p_in4, True)
 
     change_speed_a(0)
     change_speed_b(100)
+
+def Stop():
+    print('stop')
+
+    gpio.output(p_in1, True)
+    gpio.output(p_in2, False)
+    gpio.output(p_in3, True)
+    gpio.output(p_in4, False)
+
+    change_speed_a(0)
+    change_speed_b(0)
+
+def Right_soft():
+    print('right soft')
+
+    gpio.output(p_in1, False)
+    gpio.output(p_in2, True)
+    gpio.output(p_in3, False)
+    gpio.output(p_in4, True)
 
 init()
 p_a = gpio.PWM(p_ena,100)
@@ -92,13 +137,15 @@ while True:
     command = input('Give input: ')
     
     if command == 'w':
-        forward()
+        Forward()
     elif command == 'a':
-        left()
+        Left()
     elif command == 's':
-        backward()
+        Backward()
     elif command == 'd':
-        right()
+        Right()
+    elif command == 'f':
+        Stop()
     elif command == 'l':
         speed_command = input('Give speed (0 - 100): ')
         change_speed_a(int(speed_command))
