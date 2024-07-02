@@ -64,7 +64,7 @@ def right():
     print('right')
     gpio.output(p_in1, False)
     gpio.output(p_in2, True)
-    gpio.output(p_in3, False)
+    gpio.output(p_in3, True)
     gpio.output(p_in4, False)
 
     change_speed_a(100)
