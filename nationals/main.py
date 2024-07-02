@@ -53,14 +53,14 @@ try:
 
         # Colour is in BGR
 
-        blue_coords, blue_angle, blue_x, steep_angleb = midline_coords(frame_blue)
+        blue_coords, blue_angle, blue_x = midline_coords(frame_blue)
         if len(blue_coords) == 0:
             True
         else:
             for point1, point2 in zip(blue_coords, blue_coords[1:]): 
                 cv.line(frame, tuple(np.intp(point1)), tuple(np.intp(point2)), [0, 255, 255], 2) 
 
-        yellow_coords, yellow_angle, yellow_x, steep_angley = midline_coords(frame_yellow)
+        yellow_coords, yellow_angle, yellow_x = midline_coords(frame_yellow)
         if len(yellow_coords) == 0:
             True
         else:
@@ -77,7 +77,7 @@ try:
         else:
             angle = 0
 
-        if (blue_angle != None) and steep_angleb:
+        if (blue_angle != None):
             angle = -blue_angle
 
         print(angle)
