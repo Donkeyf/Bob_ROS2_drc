@@ -14,6 +14,9 @@ p_ena = 13
 # 12 (pwm) - ENB - Motor 2 - Purple 
 p_enb = 12
 
+max_speed = 100
+global_multiplier = 0.5
+
 import RPi.GPIO as gpio
 import time
 
@@ -75,28 +78,28 @@ def Forward():
     # gpio.output(p_in3, False)
     # gpio.output(p_in4, True)
 
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
 # Backward 
 def Backward():
     print('backward')
 
     setpins('tftf')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
 # Right
 def Right():
     print('right')
 
     setpins('fttf')
-    setspeed(100, 0)
+    setspeed(global_multiplier * max_speed, 0)
 
 # Left
 def Left():
     print('left')
 
     setpins('ftft')
-    setspeed(0, 100)
+    setspeed(0, global_multiplier * max_speed)
 
 def Stop():
     print('stop')
@@ -108,12 +111,12 @@ def Right_soft():
     print('right soft')
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
     time.sleep(1)
 
     setpins('fttf')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
     time.sleep(0.2)
 
@@ -121,18 +124,18 @@ def Right_medium():
     print('right medium')
 
     setpins('ftft')
-    setspeed(66, 100)
+    setspeed(int(0.66 * global_multiplier * max_speed), global_multiplier * max_speed)
 
 def Left_soft():
     print('left soft')
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
     time.sleep(1)
 
     setpins('tfft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
 
     time.sleep(0.2)
 
@@ -140,7 +143,7 @@ def Left_medium():
     print('left medium')
 
     setpins('ftft')
-    setspeed(100, 66)
+    setspeed(global_multiplier * max_speed, int(0.66 * global_multiplier * max_speed))
 
 def Object():
     print('object')
@@ -149,56 +152,56 @@ def Object():
     time.sleep(0.4)
     
     setpins('tfft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1.1)
 
     setspeed(0, 0)
     time.sleep(0.4)
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1)
 
     setpins('fttf')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1)
 
     setspeed(0, 0)
     time.sleep(0.4)
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1.4)
 
     setspeed(0, 0)
     time.sleep(0.4)
 
     setpins('fttf')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1.4)
 
     setspeed(0, 0)
     time.sleep(0.4)
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(0.8)
 
     setspeed(0, 0)
     time.sleep(0.4)
 
     setpins('tfft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1)
 
     setpins('ftft')
-    setspeed(100, 100)
+    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(0.2)
 
 
 init()
-p_a = gpio.PWM(p_ena,100)
-p_b = gpio.PWM(p_enb,100)
+p_a = gpio.PWM(p_ena,global_multiplier * max_speed)
+p_b = gpio.PWM(p_enb,global_multiplier * max_speed)
 
 p_a.start(0)
 p_b.start(0)
@@ -235,6 +238,8 @@ while True:
     elif command == 'p':
         speed_command = input('Give speed (0 - 100): ')
         change_speed_b(int(speed_command))
+    elif command == 'm':
+        global_multiplier = float('Give multiplier (0 - 1): ')
     elif command == 'q':
         gpio.cleanup()
         exit()
