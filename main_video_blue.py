@@ -54,12 +54,16 @@ while True:
     
     # # Hough line
     
-    lines = cv.HoughLines(frame_blue, 1, np.pi / 15, 160, None, 0, 0)
+    lines = cv.HoughLines(frame_blue, 1, np.pi / 180, 160, None, 0, 0)
     
     # Draw the lines
     
-    theta_sum = 0
     if lines is not None:
+        
+        theta_sum = 0
+        x_sum = 0
+        y_sum = 0
+
         for i in range(0, len(lines)):
             rho = lines[i][0][0]
             theta = lines[i][0][1]
@@ -71,10 +75,35 @@ while True:
             pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
             cv.line(frame_blur, pt1, pt2, (0,0,255), 1, cv.LINE_AA)
             theta_sum += theta
+            x_sum = np.sin(2 * theta)
+            y_sum = np.cos(2 * theta)
         
-        print(theta_sum / len(lines))
-    
-    
+        # theta_avg = theta_sum / len(lines)
+        
+        theta_double_avg = np.angle(y_sum + x_sum * 1j)
+        if theta_double_avg < 0:
+            theta_double_avg = 2 * np.pi + theta_double_avg
+        angle = theta_double_avg / 2
+
+        # a = math.cos(angle)
+        # b = math.sin(angle)
+        # x0 = a * rho
+        # y0 = b * rho
+        # pt1 = (int(x0 + 1000*(-b)), int(y0 + 1000*(a)))
+        # pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
+        
+        # cv.line(frame_blur, pt1, pt2, (255,0,0), 1, cv.LINE_AA)
+
+        # a = math.cos(theta_avg)
+        # b = math.sin(theta_avg)
+        # x0 = a * rho
+        # y0 = b * rho
+        # pt1 = (int(x0 + 1000*(-b)), int(y0 + 1000*(a)))
+        # pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
+
+        # cv.line(frame_blur, pt1, pt2, (0,255,0), 1, cv.LINE_AA)
+
+        print(angle * 180 / np.pi)
     
     cv.imshow('frame', frame_blur)
     key = cv.waitKey(1)
