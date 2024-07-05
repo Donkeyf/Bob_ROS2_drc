@@ -26,14 +26,14 @@ class ObstacleDetection:
             print(row)
             idx = 0
             while( idx < len(row)):
-                if ((row[idx].all() != 0) and (idx < self.min_x)):
+                if ((row[idx].all() > 0) and (idx < self.min_x)):
                     self.min_x = idx
-                elif (row[idx] > 0 and idx > self.max_x):
+                elif (row[idx].all() > 0 and idx > self.max_x):
                     self.max_x = idx
 
-                if (row[idx] > 0 and ctr < self.min_y):
+                if (row[idx].all() > 0 and ctr < self.min_y):
                     self.min_y = ctr
-                elif(row[idx] > 0 and ctr > self.max_y):
+                elif(row[idx].all() > 0 and ctr > self.max_y):
                     self.max_y = ctr
 
                 idx += 1
