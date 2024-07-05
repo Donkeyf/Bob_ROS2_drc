@@ -6,10 +6,7 @@ from get_contours import get_contours
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 class ObstacleDetection:
-    def __init__(self):
-        pine_purple_min = (310, 20, 40)
-        pine_purple_max = (370, 50, 70)
-
+    def __init__(self, pine_purple_min, pine_purple_max):
         self.purple_min = pinehsv_to_cvhsv(pine_purple_min)
         self.purple_max = pinehsv_to_cvhsv(pine_purple_max)
         
