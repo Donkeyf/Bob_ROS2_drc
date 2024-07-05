@@ -7,9 +7,9 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
 
-from obstacle import ObstacleDetection
+from angle_controller import motor_speed
 
-default_speed = 30
+default_speed = 50
 
 pine_yellow_min = (20, 5, 60)
 pine_yellow_max = (60, 100, 100)
@@ -33,12 +33,9 @@ capture = cv.VideoCapture(0)
 capture.set(3, 320)
 capture.set(4, 240)
 
-mc = MotorControl()
-mc.forward()
 
 try:
     while True:
-        mc.change_speed()
         retval, frame = capture.read() 
 
 
@@ -102,7 +99,34 @@ try:
                 theta_double_avg = 2 * np.pi + theta_double_avg
             angle_yellow = theta_double_avg / 2
         else:
-            angle_yellow = None       
+            angle_yellow = None
+        
+        avg_speed = 50
+        kp = 10
+
+        if (angle_yellow == None) and (angle_blue == None):
+            left_motor = avg_speed
+            right_motor = avg_speed
+        elif (angle_yellow != None) and (angle_blue == None):
+            yellow_ref = 10 * np.pi / 180
+            left_motor, right_motor = motor_speed(avg_speed, angle_yellow, yellow_ref, kp)
+
+        elif (angle_yellow == None) and (angle_blue != None):
+            blue_ref = np.pi - 10 * np.pi / 180
+            left_motor, right_motor = motor_speed(avg_speed, angle_blue, blue_ref, kp)
+        
+        else:
+            angle_x_sum = np.sin(2 * angle_yellow) + np.sin(2 * angle_blue)
+            angle_y_sum = np.cos(2 * angle_yellow) + np.cos(2 * angle_blue)
+            angle_double_average = np.angle(angle_y_sum + angle_x_sum * 1j)
+
+            if angle_double_average < 0:
+                angle_double_average = 2 * np.pi + angle_double_average
+            
+            angle_average = angle_double_average / 2
+            left_motor, right_motor = motor_speed(avg_speed, angle_average, 0, kp)
+
+            
 
 except KeyboardInterrupt:
-    mc.stop()
+    exit()
