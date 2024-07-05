@@ -6,8 +6,13 @@ from midline_coords_2 import midline_coords
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
-
 from angle_controller import motor_speed
+
+import RPi.GPIO as gpio
+
+import time
+
+from obstacle import ObstacleDetection
 
 default_speed = 50
 
@@ -33,6 +38,7 @@ capture = cv.VideoCapture(0)
 capture.set(3, 320)
 capture.set(4, 240)
 
+obs = ObstacleDetection(pine_purple_min, pine_purple_max)
 
 try:
     while True:
@@ -108,20 +114,23 @@ try:
             angle_yellow = None
             x0_yellow = None
             y0_yellow = None
-        
-        avg_speed = 50
+
+
+        cent, h, w = obs.obstacle_box(frame_blur)
+        angle = obs.man_direction(cent, x0_blue, x0_yellow)
+
         kp = 10
 
         if (angle_yellow == None) and (angle_blue == None):
-            left_motor = avg_speed
-            right_motor = avg_speed
+            left_motor = default_speed
+            right_motor = default_speed
         elif (angle_yellow != None) and (angle_blue == None):
             yellow_ref = 10 * np.pi / 180
-            left_motor, right_motor = motor_speed(avg_speed, angle_yellow, yellow_ref, kp)
+            left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
-            left_motor, right_motor = motor_speed(avg_speed, angle_blue, blue_ref, kp)
+            left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
         
         else:
             angle_x_sum = np.sin(2 * angle_yellow) + np.sin(2 * angle_blue)
@@ -138,9 +147,9 @@ try:
             elif angle_average >= 1.57:
                 angle_average_ref = 3.14
 
-            left_motor, right_motor = motor_speed(avg_speed, angle_average, angle_average_ref, kp)
+            left_motor, right_motor = motor_speed(default_speed, angle_average, angle_average_ref, kp)
 
             
 
 except KeyboardInterrupt:
-    exit()
+    gpio.cleanup()

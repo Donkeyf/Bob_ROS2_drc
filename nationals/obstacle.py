@@ -19,6 +19,8 @@ class ObstacleDetection:
         self.min_y = 2000
         self.max_y = 0
 
+        frame_purple = colour_filter(frame, self.purple_min, self.purple_max, 5, 5, 0)
+
         ctr = 0
         for row in frame:
             idx = 0
@@ -51,6 +53,8 @@ class ObstacleDetection:
             return -20
         elif (yellow_x - centroid < 180):
             return -40
+        else:
+            return None
 
 
     
