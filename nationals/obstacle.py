@@ -25,7 +25,7 @@ class ObstacleDetection:
         for row in frame:
             idx = 0
             while( idx < len(row)):
-                if (row[idx] > 0 and idx < self.min_x):
+                if ((row[idx] > 0) and (idx < self.min_x)):
                     self.min_x = idx
                 elif (row[idx] > 0 and idx > self.max_x):
                     self.max_x = idx
