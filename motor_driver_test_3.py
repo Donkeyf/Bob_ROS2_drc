@@ -166,8 +166,9 @@ def Object():
     time.sleep(0.4 / 5 / global_multiplier)
 
     # Forward
-    setpins('ftft')
-    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+    Forward()
+    # setpins('ftft')
+    # setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(2 / 5 / global_multiplier) # 1
 
     # Right
@@ -179,8 +180,9 @@ def Object():
     time.sleep(0.4 / 5 / global_multiplier)
 
     # Forward
-    setpins('ftft')
-    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+    Forward()
+    # setpins('ftft')
+    # setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(2.8 / 5 / global_multiplier) # 1.4
 
     setspeed(0, 0)
@@ -195,8 +197,9 @@ def Object():
     time.sleep(0.4 / 5 / global_multiplier)
 
     # Forward
-    setpins('ftft')
-    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+    Forward()
+    # setpins('ftft')
+    # setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(1.6 / 5 / global_multiplier) # 0.8
 
     setspeed(0, 0)
@@ -208,9 +211,12 @@ def Object():
     time.sleep(0.3 / 5 / global_multiplier) # 1
 
     # Forward
-    setpins('ftft')
-    setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
+    Forward()
+    # setpins('ftft')
+    # setspeed(global_multiplier * max_speed, global_multiplier * max_speed)
     time.sleep(0.2 / 5 / global_multiplier)
+
+    print('object done')
 
 
 init()
