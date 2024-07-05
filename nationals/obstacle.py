@@ -23,6 +23,7 @@ class ObstacleDetection:
 
         ctr = 0
         for row in frame:
+            print(row)
             idx = 0
             while( idx < len(row)):
                 if ((row[idx] > 0) and (idx < self.min_x)):
