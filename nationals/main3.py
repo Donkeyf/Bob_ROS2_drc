@@ -7,6 +7,7 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control import MotorControl
 from angle_controller import motor_speed
+from arrow_detect_1 import arrow_detect_1
 
 import RPi.GPIO as gpio
 
@@ -38,6 +39,7 @@ capture = cv.VideoCapture(0)
 capture.set(3, 320)
 capture.set(4, 240)
 
+mc = MotorControl()
 obs = ObstacleDetection(pine_purple_min, pine_purple_max)
 
 try:
@@ -118,20 +120,33 @@ try:
 
         cent, h, w = obs.obstacle_box(frame_blur)
         angle = obs.man_direction(cent, x0_blue, x0_yellow)
+        arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
         kp = 10
 
-        if (angle_yellow == None) and (angle_blue == None):
+        if (angle != None):
+            left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
+            mc.change_speed(left_motor, right_motor)
+
+        elif (arrow != None):
+            left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
+            mc.change_speed(left_motor, right_motor)
+
+
+        elif (angle_yellow == None) and (angle_blue == None):
             left_motor = default_speed
             right_motor = default_speed
+            mc.change_speed(left_motor, right_motor)
         elif (angle_yellow != None) and (angle_blue == None):
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
+            mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
-        
+            mc.change_speed(left_motor, right_motor)
+
         else:
             angle_x_sum = np.sin(2 * angle_yellow) + np.sin(2 * angle_blue)
             angle_y_sum = np.cos(2 * angle_yellow) + np.cos(2 * angle_blue)
@@ -148,7 +163,7 @@ try:
                 angle_average_ref = 3.14
 
             left_motor, right_motor = motor_speed(default_speed, angle_average, angle_average_ref, kp)
-
+            mc.change_speed(left_motor, right_motor)
             
 
 except KeyboardInterrupt:
