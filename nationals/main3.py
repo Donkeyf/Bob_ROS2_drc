@@ -58,11 +58,11 @@ try:
 
             for i in range(0, len(lines_blue)):
                 theta = lines_blue[i][0][1]
-                # rho = lines[i][0][0]
-                # a = math.cos(theta)
-                # b = math.sin(theta)
-                # x0 = a * rho
-                # y0 = b * rho
+                rho = lines_blue[i][0][0]
+                a = np.cos(theta)
+                b = np.sin(theta)
+                x0 = a * rho
+                y0 = b * rho
                 # pt1 = (int(x0 + 1000*(-b)), int(y0 + 1000*(a)))
                 # pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
                 # cv.line(frame_blur, pt1, pt2, (0,0,255), 1, cv.LINE_AA)
@@ -73,8 +73,12 @@ try:
             if theta_double_avg < 0:
                 theta_double_avg = 2 * np.pi + theta_double_avg
             angle_blue = theta_double_avg / 2
+            x0_blue = x0
+            y0_blue = y0
         else:
             angle_blue = None
+            x0_blue = None
+            y0_blue = None
 
         if lines_yellow is not None:
             
@@ -83,11 +87,11 @@ try:
 
             for i in range(0, len(lines_yellow)):
                 theta = lines_yellow[i][0][1]
-                # rho = lines[i][0][0]
-                # a = math.cos(theta)
-                # b = math.sin(theta)
-                # x0 = a * rho
-                # y0 = b * rho
+                rho = lines_yellow[i][0][0]
+                a = np.cos(theta)
+                b = np.sin(theta)
+                x0 = a * rho
+                y0 = b * rho
                 # pt1 = (int(x0 + 1000*(-b)), int(y0 + 1000*(a)))
                 # pt2 = (int(x0 - 1000*(-b)), int(y0 - 1000*(a)))
                 # cv.line(frame_blur, pt1, pt2, (0,0,255), 1, cv.LINE_AA)
@@ -98,8 +102,12 @@ try:
             if theta_double_avg < 0:
                 theta_double_avg = 2 * np.pi + theta_double_avg
             angle_yellow = theta_double_avg / 2
+            x0_yellow = x0
+            y0_yellow = y0
         else:
             angle_yellow = None
+            x0_yellow = None
+            y0_yellow = None
         
         avg_speed = 50
         kp = 10
@@ -124,7 +132,13 @@ try:
                 angle_double_average = 2 * np.pi + angle_double_average
             
             angle_average = angle_double_average / 2
-            left_motor, right_motor = motor_speed(avg_speed, angle_average, 0, kp)
+
+            if angle_average < 1.57:
+                angle_average_ref = 0
+            elif angle_average >= 1.57:
+                angle_average_ref = 3.14
+
+            left_motor, right_motor = motor_speed(avg_speed, angle_average, angle_average_ref, kp)
 
             
 
