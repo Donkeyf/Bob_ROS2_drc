@@ -116,7 +116,8 @@ try:
 
 
         cent, h, w = obs.obstacle_box(frame_blur)
-        angle = obs.man_direction(cent, x0_blue, x0_yellow)
+        if x0_blue != None or x0_yellow != None:
+            angle = obs.man_direction(cent, x0_blue, x0_yellow)
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
         kp = 10

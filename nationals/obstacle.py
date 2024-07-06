@@ -45,18 +45,35 @@ class ObstacleDetection:
         return centroid, width, height
     
     def man_direction(self, centroid, blue_x, yellow_x):
-        if centroid[0] == None:
+        if (centroid[0] == None) and yellow_x == None and blue_x == None:
             return None
-        elif (centroid[0] - blue_x < 60):
-            return 0.3
-        elif (centroid[0] - blue_x < 180):
-            return 0.6
-        elif (yellow_x - centroid[0] < 60):
-            return -0.3
-        elif (yellow_x - centroid[0] < 180):
-            return -0.6
+        
+        elif blue_x == None:
+            
+            if (yellow_x - centroid[0] < 60):
+                return -0.3
+            elif (yellow_x - centroid[0] < 180):
+                return -0.6
+            else:
+                return None
+            
+        elif yellow_x == None:
+            if (centroid[0] - blue_x < 60):
+                return 0.3
+            elif (centroid[0] - blue_x < 180):
+                return 0.6
+            else:
+                return None
+            
         else:
-            return None
+            if (yellow_x - centroid[0] < 60):
+                return -0.3
+            elif (yellow_x - centroid[0] < 180):
+                return -0.6
+            elif (centroid[0] - blue_x < 60):
+                return 0.3
+            elif (centroid[0] - blue_x < 180):
+                return 0.6
 
 
     
