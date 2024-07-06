@@ -71,11 +71,11 @@ class MotorControl():
         # gpio.cleanup()
 
 
-    def change_speed(self, pwm):
+    def change_speed(self, a, b):
         # print('Speed: ', pwm)
         
-        self.p_a.ChangeDutyCycle(pwm)
-        self.p_b.ChangeDutyCycle(pwm)
+        self.p_a.ChangeDutyCycle(a)
+        self.p_b.ChangeDutyCycle(b)
 
 
     def turn_right(self, angle):

@@ -5,7 +5,7 @@ from colour_filter import colour_filter
 from midline_coords_2 import midline_coords
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
-from motor_control import MotorControl
+from motor_control_2 import MotorControl
 from angle_controller import motor_speed
 from arrow_detect_1 import arrow_detect_1
 
