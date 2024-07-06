@@ -124,32 +124,34 @@ try:
 
         kp = 10
 
+        mc.forward()
+        
         if (angle != None):
             left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
 
         elif (arrow != None):
             left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
 
 
         elif (angle_yellow == None) and (angle_blue == None):
             left_motor = default_speed
             right_motor = default_speed
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
         elif (angle_yellow != None) and (angle_blue == None):
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
 
         else:
@@ -168,7 +170,7 @@ try:
                 angle_average_ref = 3.14
 
             left_motor, right_motor = motor_speed(default_speed, angle_average, angle_average_ref, kp)
-            mc.setpins('ftft')
+            # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
             
 
