@@ -38,7 +38,7 @@ class ObstacleDetection:
                 idx += 1
             ctr += 1
 
-        centroid = ((self.max_x + self.min_x)/2 , (self.max_y, self.min_y)/2)
+        centroid = ((self.max_x + self.min_x)/2 , (self.max_y + self.min_y)/2)
         height = self.max_y - self.min_y
         width = self.max_x - self.min_x
 
