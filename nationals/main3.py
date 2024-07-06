@@ -46,9 +46,6 @@ try:
     while True:
         retval, frame = capture.read() 
 
-
-        if not retval:
-            break
         
         blank_frame = np.zeros_like(frame)
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
