@@ -10,11 +10,11 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 # Colours are in HSV
 # Range is 0-180, 0-255, 0-255
 
-pine_purple_min = (300, 10, 40)
-pine_purple_max = (330, 50, 100)
+pine_black_min = (0, 0, 0)
+pine_black_max = (360, 100, 50)
 
-purple_min = pinehsv_to_cvhsv(pine_purple_min)
-purple_max = pinehsv_to_cvhsv(pine_purple_max)
+black_min = pinehsv_to_cvhsv(pine_black_min)
+black_max = pinehsv_to_cvhsv(pine_black_max)
 
 capture = cv.VideoCapture(1)
 capture.set(3, 128)
@@ -37,11 +37,11 @@ while True:
     # frame_blur = cv.GaussianBlur(frame, (45,45), 1)
     # frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
     # frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
-    frame_purple = colour_filter(frame_blur, purple_min, purple_max, 5, 5, 0)
+    frame_black = colour_filter(frame_blur, black_min, black_max, 5, 5, 0)
 
     # contours_yellow = get_contours(frame_yellow)
     # contours_blue = get_contours(frame_blue)
-    contours_purple = get_contours(frame_purple)
+    contours_black = get_contours(frame_black)
     # contours_yellow, yellow_track = contour_filter_4(contours_yellow)
     # contours_blue, blue_track = contour_filter_4(contours_blue)
 
@@ -49,7 +49,7 @@ while True:
     # cv.drawContours(blank_frame, contours_blue, -1, (255, 0, 0))
     # cv.drawContours(frame, contours_yellow, -1, (255,0,0))
     # cv.drawContours(frame, contours_blue, -1, yellow_max)
-    cv.drawContours(frame, contours_purple, -1, (0,0,255))
+    cv.drawContours(frame, contours_black, -1, (0,0,255))
 
     # try:
     #         # cv.line(blank_frame, 
@@ -72,7 +72,7 @@ while True:
     # except:
     #         None
 
-    cv.imshow('frame', frame_purple)
+    cv.imshow('frame', frame)
     key = cv.waitKey(1)
 
     if key == ord('f'):

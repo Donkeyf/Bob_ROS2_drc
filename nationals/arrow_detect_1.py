@@ -60,7 +60,7 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
                 if (cy < y + h/2): # If mean black pixel is above middle black pixel
                     if (w * h > 2 * area) & (w * h < 5 * area): # If arrow is between 1/5 and 1/2 area of bounding box
                         # print('left', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
-                        return -40
+                        return -0.6
             #         else:
             #             print('nuh uh - not left - black to nonblack ratio is off')
             #     else:
@@ -73,7 +73,7 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
                 if (cy < y + h/2):
                     if (w * h > 2 * area) & (w * h < 5 * area):
                         # print('right', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
-                        return 40
+                        return 0.6
         #             else:
         #                 print('nuh uh - not right - black to nonblack ratio is off')
         #         else:
@@ -97,7 +97,7 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
 
 if __name__ == '__main__':
 
-    capture = cv.VideoCapture(0)
+    capture = cv.VideoCapture(1)
     capture.set(3, 128)
     capture.set(4, 96)
 

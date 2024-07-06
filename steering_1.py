@@ -8,24 +8,24 @@ from colour_filter import colour_filter
 from get_contours import get_contours
 from contour_filters import contour_filter_4
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
-from angle_controller import motor_speed
+from nationals.angle_controller import motor_speed
 
 # Colours are in HSV
 # Range is 0-180, 0-255, 0-255
 
-pine_yellow_min = (40, 5, 70)
-pine_yellow_max = (60, 50, 100)
+pine_yellow_min = (40, 5, 50)
+pine_yellow_max = (70, 100, 100)
+
+pine_blue_min = (195, 20, 60)
+pine_blue_max = (220, 100, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
 
-pine_blue_min = (200, 50, 60)
-pine_blue_max = (210, 100, 100)
-
 blue_min = pinehsv_to_cvhsv(pine_blue_min)
 blue_max = pinehsv_to_cvhsv(pine_blue_max)
 
-capture = cv.VideoCapture(0)
+capture = cv.VideoCapture(1)
 capture.set(3, 128)
 capture.set(4, 96)
 
@@ -107,11 +107,13 @@ while True:
     elif (angle_yellow != None) and (angle_blue == None):
         yellow_ref = 10 * np.pi / 180
         left_motor, right_motor = motor_speed(avg_speed, angle_yellow, yellow_ref, kp)
+        print('yellow')
 
     elif (angle_yellow == None) and (angle_blue != None):
         blue_ref = np.pi - 10 * np.pi / 180
         left_motor, right_motor = motor_speed(avg_speed, angle_blue, blue_ref, kp)
-    
+        print('blue')
+     
     else:
         angle_x_sum = np.sin(2 * angle_yellow) + np.sin(2 * angle_blue)
         angle_y_sum = np.cos(2 * angle_yellow) + np.cos(2 * angle_blue)
@@ -121,6 +123,7 @@ while True:
             angle_double_average = 2 * np.pi + angle_double_average
         
         angle_average = angle_double_average / 2
+        print('both')
         left_motor, right_motor = motor_speed(avg_speed, angle_average, 0, kp)
 
     print(left_motor, right_motor)

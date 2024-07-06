@@ -17,17 +17,17 @@ from obstacle import ObstacleDetection
 
 default_speed = 50
 
-pine_yellow_min = (20, 5, 60)
-pine_yellow_max = (60, 100, 100)
+pine_yellow_min = (40, 5, 50)
+pine_yellow_max = (70, 100, 100)
 
-pine_blue_min = (195, 30, 60)
+pine_blue_min = (195, 20, 60)
 pine_blue_max = (220, 100, 100)
 
 pine_black_min = (0, 0, 0)
 pine_black_max = (360, 100, 50)
 
-pine_purple_min = (310, 20, 40)
-pine_purple_max = (370, 50, 70)
+pine_purple_min = (300, 10, 40)
+pine_purple_max = (330, 50, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)

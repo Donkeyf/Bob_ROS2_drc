@@ -47,13 +47,13 @@ class ObstacleDetection:
     
     def man_direction(self, centroid, blue_x, yellow_x):
         if (centroid - blue_x < 60):
-            return 20
+            return 0.3
         elif (centroid - blue_x < 180):
-            return 40
+            return 0.6
         elif (yellow_x - centroid < 60):
-            return -20
+            return -0.3
         elif (yellow_x - centroid < 180):
-            return -40
+            return -0.6
         else:
             return None
 
