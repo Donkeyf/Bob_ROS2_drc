@@ -26,8 +26,8 @@ pine_blue_max = (220, 100, 100)
 pine_black_min = (0, 0, 0)
 pine_black_max = (360, 100, 50)
 
-pine_purple_min = (300, 10, 40)
-pine_purple_max = (330, 50, 100)
+pine_purple_min = (270, 10, 25)
+pine_purple_max = (330, 60, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
