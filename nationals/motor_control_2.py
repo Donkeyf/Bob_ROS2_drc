@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 
-default_speed = 10
+default_speed = 20
 
 class MotorControl():
     def __init__(self):
@@ -66,14 +66,14 @@ class MotorControl():
     def change_speed(self, pwm_a, pwm_b):
         # print('Speed: ', pwm)
         
-        self.p_a.ChangeDutyCycle(pwm_a)
-        self.p_b.ChangeDutyCycle(pwm_b)
+        self.p_a.ChangeDutyCycle(int(pwm_a))
+        self.p_b.ChangeDutyCycle(int(pwm_b))
 
     def change_speed_a(self, pwm):
-        self.p_a.ChangeDutyCycle(pwm)
+        self.p_a.ChangeDutyCycle(int(pwm))
 
     def change_speed_b(self, pwm):
-        self.p_b.ChangeDutyCycle(pwm)
+        self.p_b.ChangeDutyCycle(int(pwm))
 
     def forward(self):
         print('forward')
