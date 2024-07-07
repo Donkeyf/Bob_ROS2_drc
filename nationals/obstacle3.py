@@ -27,6 +27,8 @@ class ObstacleDetection:
         if len(cnt) == 0:
             return None
         
+        cnt = cnt[0]
+        
         # Calculating middle and extreme points of black pixels
         
         leftmost = tuple(cnt[cnt[:,:,0].argmin()][0])
