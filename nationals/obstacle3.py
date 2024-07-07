@@ -17,7 +17,7 @@ class ObstacleDetection:
         self.width = 320
         self.height = 240
 
-    def obstacle_box(frame):
+    def obstacle_box(self, frame):
         purple = colour_filter(frame, purple_min, purple_max)
         _, binary_image = cv2.threshold(purple, 150, 255, cv2.THRESH_BINARY)
 
