@@ -21,13 +21,19 @@ class ObstacleDetection:
         purple = colour_filter(frame, purple_min, purple_max)
         _, binary_image = cv2.threshold(purple, 150, 255, cv2.THRESH_BINARY)
 
-        cnt, hierarchy = cv2.findContours(
+        contour, hierarchy = cv2.findContours(
         binary_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-        if len(cnt) == 0:
+        if len(contour) == 0:
             return None
         
-        cnt = cnt[0]
+        max_area = 0
+        for con in contour:
+            area = cv2.contourArea(con)
+            if area > max_area:
+                max_area = area
+                cnt = con
+
         
         # Calculating middle and extreme points of black pixels
         
