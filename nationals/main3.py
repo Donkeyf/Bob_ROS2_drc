@@ -117,11 +117,11 @@ try:
             y0_yellow = None
 
         print(angle_yellow, x0_yellow, y0_yellow)
-        cent, h, w = obs.obstacle_box(frame_blur)
-        if x0_blue != None or x0_yellow != None:
-            angle = obs.man_direction(cent, x0_blue, x0_yellow)
-        else:
-            angle = None
+        # cent, h, w = obs.obstacle_box(frame_blur)
+        # if x0_blue != None or x0_yellow != None:
+        #     angle = obs.man_direction(cent, x0_blue, x0_yellow)
+        # else:
+        #     angle = None
         # arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
         kp = 10
@@ -130,11 +130,11 @@ try:
         print(angle_blue)
 
         
-        if (angle != None):
-            left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
-            # mc.setpins('ftft')
-            print('angle', left_motor, right_motor)
-            mc.change_speed(left_motor, right_motor)
+        # if (angle != None):
+        #     left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
+        #     # mc.setpins('ftft')
+        #     print('angle', left_motor, right_motor)
+        #     mc.change_speed(left_motor, right_motor)
 
         # elif (arrow != None):
         #     left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
@@ -142,7 +142,7 @@ try:
         #     mc.change_speed(left_motor, right_motor)
 
 
-        elif (angle_yellow == None) and (angle_blue == None):
+        if (angle_yellow == None) and (angle_blue == None):
             left_motor = default_speed
             right_motor = default_speed
             # mc.setpins('ftft')
