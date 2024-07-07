@@ -125,7 +125,10 @@ try:
             angle = None
         elif x0_blue != None or x0_yellow != None:
             angle = obs.man_direction(cent, x0_blue, x0_yellow)
-            print('onstacle', angle)
+            print('onstacle one', angle)
+        else:
+            angle = 1.2
+            print('onstacle none', angle)
         
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
