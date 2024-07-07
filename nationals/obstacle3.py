@@ -24,10 +24,10 @@ while True:
     frame_blur = cv2.GaussianBlur(frame, (11,11), 100)
 
     purple = colour_filter(frame_blur, purple_min, purple_max)
-    grayscale_image = cv2.cvtColor(purple, cv2.COLOR_BGR2GRAY)
+    # grayscale_image = cv2.cvtColor(purple, cv2.COLOR_BGR2GRAY)
 
     # Convert to binary image
-    _, binary_image = cv2.threshold(grayscale_image, 150, 255, cv2.THRESH_BINARY)
+    _, binary_image = cv2.threshold(purple, 150, 255, cv2.THRESH_BINARY)
 
     # Find all the contours
     all_contours, hierarchy = cv2.findContours(
@@ -38,27 +38,23 @@ while True:
     for contour in all_contours:
         # Approximate contour to a polygon
         perimeter = cv2.arcLength(contour, True)
-        approx = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
+        x, y, w, h = cv2.boundingRect(contour)
+        aspect_ratio = float(w) / h
 
-        # Calculate aspect ratio and bounding box
-        if len(approx) == 4:
-            x, y, w, h = cv2.boundingRect(approx)
-            aspect_ratio = float(w) / h
-
-            # Draw bounding box
-            cv2.drawContours(original_image, [approx], -1, (0, 255, 0), 3)
-            cv2.putText(
-                original_image,
-                "Rectangle",
-                (x, y - 10),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.5,
-                (0, 255, 0),
-                2,
-            )
+        # Draw bounding box
+        cv2.drawContours(original_image, [contour], -1, (0, 255, 0), 3)
+        cv2.putText(
+            original_image,
+            "Obstacle",
+            (x, y - 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (0, 255, 0),
+            2,
+        )
 
     # Display the result
-    cv2.imshow("Detected Rectangles", original_image)
+    cv2.imshow("Detected Obstacles", original_image)
     key = cv2.waitKey(1)
 
     if key == ord('f'):
