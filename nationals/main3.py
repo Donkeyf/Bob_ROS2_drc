@@ -132,7 +132,7 @@ try:
         
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
-        kp = 9.5
+        kp = 10
 
         # print(angle_yellow)
         # print(angle_blue)
