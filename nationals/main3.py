@@ -13,7 +13,7 @@ import RPi.GPIO as gpio
 
 import time
 
-from obstacle import ObstacleDetection
+from obstacle3 import ObstacleDetection
 
 default_speed = 20
 
