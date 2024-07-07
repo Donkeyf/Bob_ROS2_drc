@@ -127,6 +127,7 @@ try:
         kp = 10
 
         print(angle_yellow)
+        print(angle_blue)
 
         
         if (angle != None):
