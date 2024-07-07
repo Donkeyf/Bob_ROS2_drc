@@ -15,7 +15,7 @@ import time
 
 from obstacle3 import ObstacleDetection
 
-default_speed = 20
+default_speed = 30
 
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
