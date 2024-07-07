@@ -2,6 +2,8 @@ default_speed = 25
 kp = 13
 arrow_multiplier = 1.5
 object_multiplier = 1
+tight_turn_multiplier = 0.2
+tight_turn_angle = 30
 
 import cv2 as cv
 import numpy as np
@@ -166,14 +168,24 @@ try:
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
             # mc.setpins('ftft')
-            print('yellow', left_motor, right_motor)
+            if angle_yellow > np.pi / 2 - tight_turn_angle * np.pi / 180:
+                left_motor = int(tight_turn_multiplier * left_motor)
+                right_motor = int(tight_turn_multiplier * right_motor)
+                print('tight yellow', left_motor, right_motor)
+            else:
+                print('yellow', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
             # mc.setpins('ftft')
-            print('blue', left_motor, right_motor)
+            if angle_yellow > np.pi / 2 - tight_turn_angle * np.pi / 180:
+                left_motor = int(tight_turn_multiplier * left_motor)
+                right_motor = int(tight_turn_multiplier * right_motor)
+                print('tight blue', left_motor, right_motor)
+            else:
+                print('blue', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         else:
