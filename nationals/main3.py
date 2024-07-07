@@ -50,6 +50,8 @@ try:
 
         
         blank_frame = np.zeros_like(frame)
+
+        frame = frame[frame.shape[0]/2:frame.shape[0]]
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
 
         frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
