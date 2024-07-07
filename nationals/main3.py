@@ -141,6 +141,7 @@ try:
         if (arrow != None):
             left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
             # mc.setpins('ftft')
+            print('arrow', left_motor, right_motor, arrow)
             mc.change_speed(left_motor, right_motor)
 
 
