@@ -116,7 +116,7 @@ try:
             x0_yellow = None
             y0_yellow = None
 
-        print(angle_yellow, x0_yellow, y0_yellow)
+        # print(angle_yellow, x0_yellow, y0_yellow)
         # cent, h, w = obs.obstacle_box(frame_blur)
         # if x0_blue != None or x0_yellow != None:
         #     angle = obs.man_direction(cent, x0_blue, x0_yellow)
@@ -126,8 +126,8 @@ try:
 
         kp = 10
 
-        print(angle_yellow)
-        print(angle_blue)
+        # print(angle_yellow)
+        # print(angle_blue)
 
         
         # if (angle != None):
