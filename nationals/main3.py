@@ -144,6 +144,7 @@ try:
             # mc.setpins('ftft')
             print('arrow', left_motor, right_motor, arrow)
             mc.change_speed(left_motor, right_motor)
+            time.sleep(0.5)
 
 
         elif (angle_yellow == None) and (angle_blue == None):
