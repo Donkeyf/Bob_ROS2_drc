@@ -26,10 +26,8 @@ class ObstacleDetection:
         purple[0, :] = 0
         purple[-1, :] = 0
 
-        _, binary_image = cv2.threshold(purple, 150, 255, cv2.THRESH_BINARY)
-
         contour, hierarchy = cv2.findContours(
-        binary_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        purple, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
         if len(contour) == 0:
             return None
