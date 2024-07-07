@@ -1,3 +1,8 @@
+default_speed = 30
+kp = 9
+arrow_multiplier = 1.5
+object_multiplier = 1
+
 import cv2 as cv
 import numpy as np
 
@@ -14,8 +19,6 @@ import RPi.GPIO as gpio
 import time
 
 from obstacle3 import ObstacleDetection
-
-default_speed = 30
 
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
@@ -132,19 +135,19 @@ try:
         
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
-        kp = 9
-
         # print(angle_yellow)
         # print(angle_blue)
 
         
         if (angle != None):
+            angle = angle * object_multiplier
             left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
             # mc.setpins('ftft')
             print('angle', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         elif (arrow != None):
+            arrow = arrow * arrow_multiplier
             left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
             # mc.setpins('ftft')
             print('arrow', left_motor, right_motor, arrow)
