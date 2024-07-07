@@ -19,6 +19,13 @@ class ObstacleDetection:
 
     def obstacle_box(self, frame):
         purple = colour_filter(frame, purple_min, purple_max)
+
+        # Adds white border around the picture
+        purple[:, 0] = 0
+        purple[:, -1] = 0
+        purple[0, :] = 0
+        purple[-1, :] = 0
+
         _, binary_image = cv2.threshold(purple, 150, 255, cv2.THRESH_BINARY)
 
         contour, hierarchy = cv2.findContours(
