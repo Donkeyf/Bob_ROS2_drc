@@ -185,15 +185,6 @@ try:
             # mc.setpins('ftft')
             print('both', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
-            
-        cv.imshow('frame', frame)
-        key = cv.waitKey(1)
-
-        if key == ord('f'):
-            break
-
-        elif key == ord('p'):
-            cv.waitKey(-1)
 
 except KeyboardInterrupt:
     gpio.cleanup()
