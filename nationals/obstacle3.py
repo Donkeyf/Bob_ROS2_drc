@@ -63,9 +63,9 @@ class ObstacleDetection:
             # If you don't see blue, go right
             
             if (yellow_x - centroid[0] < 60):
-                return 1.2
+                return 0.6
             elif (yellow_x - centroid[0] < 180):
-                return 2.4
+                return 1.2
             else:
                 return None
             
@@ -74,9 +74,9 @@ class ObstacleDetection:
             # If you don't see yellow, go left
             
             if (centroid[0] - blue_x < 60):
-                return -1.2
+                return -0.6
             elif (centroid[0] - blue_x < 180):
-                return -2.4
+                return -1.2
             else:
                 return None
             
@@ -85,13 +85,13 @@ class ObstacleDetection:
             # Go right
             
             if (yellow_x - centroid[0] < 60):
-                return 1.2
+                return 0.6
             elif (yellow_x - centroid[0] < 180):
-                return 2.4
+                return 1.2
             
             # Go left
             
             elif (centroid[0] - blue_x < 60):
-                return -1.2
+                return -0.6
             elif (centroid[0] - blue_x < 180):
-                return -2.4
+                return -1.2
