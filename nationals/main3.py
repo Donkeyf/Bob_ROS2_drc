@@ -122,7 +122,7 @@ try:
             angle = obs.man_direction(cent, x0_blue, x0_yellow)
         else:
             angle = None
-        arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
+        # arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
         kp = 10
 
@@ -135,10 +135,10 @@ try:
             # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
 
-        elif (arrow != None):
-            left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
-            # mc.setpins('ftft')
-            mc.change_speed(left_motor, right_motor)
+        # elif (arrow != None):
+        #     left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
+        #     # mc.setpins('ftft')
+        #     mc.change_speed(left_motor, right_motor)
 
 
         elif (angle_yellow == None) and (angle_blue == None):
