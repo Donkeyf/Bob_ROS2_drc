@@ -22,7 +22,7 @@ class ObstacleDetection:
         frame_purple = colour_filter(frame, self.purple_min, self.purple_max, 5, 5, 0)
 
         ctr = 0
-        for row in frame:
+        for row in frame_purple:
             idx = 0
             while( idx < len(row)):
                 if ((row[idx].all() > 0) and (idx < self.min_x)):
