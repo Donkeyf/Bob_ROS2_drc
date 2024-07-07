@@ -15,7 +15,7 @@ import time
 
 from obstacle import ObstacleDetection
 
-default_speed = 20
+default_speed = 10
 
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
@@ -41,6 +41,8 @@ capture.set(4, 240)
 
 mc = MotorControl()
 obs = ObstacleDetection(pine_purple_min, pine_purple_max)
+
+mc.setpins('ftft')
 
 try:
     while True:
@@ -124,7 +126,7 @@ try:
 
         kp = 10
 
-        mc.forward()
+
         
         if (angle != None):
             left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
@@ -143,6 +145,7 @@ try:
             # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
         elif (angle_yellow != None) and (angle_blue == None):
+            print(angle_yellow)
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
             # mc.setpins('ftft')
