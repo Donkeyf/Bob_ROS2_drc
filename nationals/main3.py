@@ -138,11 +138,11 @@ try:
         # print(angle_blue)
 
         
-        # if (angle != None):
-        #     left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
-        #     # mc.setpins('ftft')
-        #     print('angle', left_motor, right_motor)
-        #     mc.change_speed(left_motor, right_motor)
+        if (angle != None):
+            left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
+            # mc.setpins('ftft')
+            print('angle', left_motor, right_motor)
+            mc.change_speed(left_motor, right_motor)
 
         if (arrow != None):
             left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
