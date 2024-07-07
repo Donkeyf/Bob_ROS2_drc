@@ -146,21 +146,21 @@ try:
             left_motor = default_speed
             right_motor = default_speed
             # mc.setpins('ftft')
-            print('both non', left_motor, right_motor)
+            print('none', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
         elif (angle_yellow != None) and (angle_blue == None):
 
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
             # mc.setpins('ftft')
-            print('blue non', left_motor, right_motor)
+            print('yellow', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
             # mc.setpins('ftft')
-            print('yellow non', left_motor, right_motor)
+            print('blue', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         else:
@@ -180,7 +180,7 @@ try:
 
             left_motor, right_motor = motor_speed(default_speed, angle_average, angle_average_ref, kp)
             # mc.setpins('ftft')
-            print('both yes', left_motor, right_motor)
+            print('both', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
             
 
