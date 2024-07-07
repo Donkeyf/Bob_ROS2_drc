@@ -18,6 +18,14 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
     
     frame_black = colour_filter(frame, black_min, black_max, 3, 5, 2)
 
+    # Adds white border around the picture
+    frame_black[:, 0] = 0
+    frame_black[:, -1] = 0
+    frame_black[0, :] = 0
+    frame_black[-1, :] = 0
+
+    # frame_black = cv.copyMakeBorder(frame_black, 5, 5, 5, 5, cv.BORDER_CONSTANT, None, value = 255)
+
     # Detect black edges
     
     edges = cv.Canny(frame_black,50,150,apertureSize = 3)
@@ -118,6 +126,12 @@ if __name__ == '__main__':
         
         print(arrow_detect_1(frame, pine_black_min, pine_black_max))
 
+        # # Adds white border around the picture
+        # frame[:, 0] = 0
+        # frame[:, -1] = 0
+        # frame[0, :] = 0
+        # frame[-1, :] = 0
+        
         cv.imshow('frame', frame)
         key = cv.waitKey(1)
 
