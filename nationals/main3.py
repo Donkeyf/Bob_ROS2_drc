@@ -126,6 +126,7 @@ try:
 
         kp = 10
 
+        print(angle_yellow)
 
         
         if (angle != None):
@@ -145,7 +146,7 @@ try:
             # mc.setpins('ftft')
             mc.change_speed(left_motor, right_motor)
         elif (angle_yellow != None) and (angle_blue == None):
-            print(angle_yellow)
+
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
             # mc.setpins('ftft')
