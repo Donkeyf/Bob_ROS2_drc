@@ -69,4 +69,4 @@ class ObstacleDetection:
             elif (centroid[0] - blue_x < 60):
                 return 0.3
             elif (centroid[0] - blue_x < 180):
-                return 0.6   
+                return 0.6
