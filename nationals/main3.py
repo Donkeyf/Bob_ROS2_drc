@@ -51,6 +51,7 @@ try:
         
         blank_frame = np.zeros_like(frame)
 
+        frame_fresh = frame.copy()
         frame = frame[int(len(frame)/2):int(len(frame))]
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
 
@@ -119,7 +120,7 @@ try:
             y0_yellow = None
 
         # print(angle_yellow, x0_yellow, y0_yellow)
-        cent = obs.obstacle_box(frame_blur)
+        cent = obs.obstacle_box(frame_fresh)
         if cent == None:
             angle = None
         elif x0_blue != None or x0_yellow != None:
