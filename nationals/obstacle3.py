@@ -24,8 +24,9 @@ class ObstacleDetection:
         cnt, hierarchy = cv2.findContours(
         binary_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-        area = cv2.contourArea(cnt[0])
-
+        if len(cnt) == 0:
+            return None
+        
         # Calculating middle and extreme points of black pixels
         
         leftmost = tuple(cnt[cnt[:,:,0].argmin()][0])
