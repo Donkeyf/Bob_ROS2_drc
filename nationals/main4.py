@@ -2,7 +2,7 @@ default_speed = 40
 kp = 9
 arrow_multiplier = 1.5
 object_multiplier = 1
-tight_turn_multiplier = 0.2
+tight_turn_multiplier = 0.5
 tight_turn_angle = 20
 
 import cv2 as cv
