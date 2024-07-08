@@ -1,4 +1,4 @@
-default_speed = 20
+default_speed = 60
 kp = 9
 arrow_multiplier = 1.5
 object_multiplier = 1
@@ -163,6 +163,7 @@ try:
             # mc.setpins('ftft')
             print('none', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
+
         elif (angle_yellow != None) and (angle_blue == None):
 
             yellow_ref = 10 * np.pi / 180
