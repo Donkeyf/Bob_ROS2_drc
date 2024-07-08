@@ -185,6 +185,8 @@ try:
         elif (angle_yellow == None) and (angle_blue == None):
             left_motor = DEFAULT_SPEED
             right_motor = DEFAULT_SPEED
+            _, _, previous_time, previous_error, current_integral \
+                = pid_motor_speed(DEFAULT_SPEED, 0, 0, previous_time, previous_error, current_integral, KP, KI, KD)
 
             print('none', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
