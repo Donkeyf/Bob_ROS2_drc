@@ -160,9 +160,9 @@ try:
         if (angle != None):
             angle = angle * OBJECT_MULTIPLIER
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
 
-            left_motor, right_motor = motor_speed(DEFAULT_SPEED, angle, 0, KP)
+            left_motor, right_motor = pid_motor_speed(DEFAULT_SPEED, angle, 0, KP)
             print('angle', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
@@ -170,14 +170,14 @@ try:
             arrow = arrow * ARROW_MULTIPLIER
 
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, arrow, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, arrow, 0, previous_time, previous_error, current_integral, KP, KI, KD)
             
             print('arrow', left_motor, right_motor, arrow)
             mc.change_speed(left_motor, right_motor)
         
         elif (finish_angle != None):
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
 
             print('Finish', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
@@ -192,7 +192,7 @@ try:
         elif (angle_yellow != None) and (angle_blue == None):
             yellow_ref = 10 * np.pi / 180
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, angle_yellow, yellow_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, angle_yellow, yellow_ref, previous_time, previous_error, current_integral, KP, KI, KD)
 
             print('yellow', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
@@ -200,7 +200,7 @@ try:
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, angle_blue, blue_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, angle_blue, blue_ref, previous_time, previous_error, current_integral, KP, KI, KD)
 
             print('blue', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
@@ -221,7 +221,7 @@ try:
                 angle_average_ref = 3.14
 
             left_motor, right_motor, previous_time, previous_error, current_integral \
-                = motor_speed(DEFAULT_SPEED, angle_average, angle_average_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+                = pid_motor_speed(DEFAULT_SPEED, angle_average, angle_average_ref, previous_time, previous_error, current_integral, KP, KI, KD)
 
 
             print('both', left_motor, right_motor)
