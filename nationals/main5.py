@@ -1,9 +1,12 @@
-default_speed = 20
-kp = 9
-arrow_multiplier = 1.5
-object_multiplier = 1
-tight_turn_multiplier = 0.2
-tight_turn_angle = 30
+# Configuration Parameters for Motor Control and Object Detection
+DEFAULT_SPEED = 25
+ARROW_MULTIPLIER = 1.5
+OBJECT_MULTIPLIER = 1
+
+# PID Controller Gains
+KP = 13
+KI = 0
+KD = 0
 
 import cv2 as cv
 import numpy as np
@@ -14,7 +17,9 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 from motor_control_2 import MotorControl
 from angle_controller import motor_speed
+from angle_controller_2 import pid_motor_speed
 from arrow_detect_1 import arrow_detect_1
+from start_stop import find_finish
 
 import RPi.GPIO as gpio
 
@@ -22,10 +27,12 @@ import time
 
 from obstacle3 import ObstacleDetection
 
+start_time = time.time()
+
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
 
-pine_blue_min = (195, 20, 60)
+pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
 
 pine_black_min = (0, 0, 0)
@@ -34,16 +41,21 @@ pine_black_max = (360, 100, 50)
 pine_purple_min = (270, 10, 25)
 pine_purple_max = (330, 60, 100)
 
+pine_green_min = (75, 19, 50)
+pine_green_max = (80, 45, 90)
+
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
 
 blue_min = pinehsv_to_cvhsv(pine_blue_min)
 blue_max = pinehsv_to_cvhsv(pine_blue_max)
 
+# Video Capture Setup
 capture = cv.VideoCapture(0)
-capture.set(3, 320)
-capture.set(4, 240)
+capture.set(3, 320)                         # Set Video Width to 320px
+capture.set(4, 240)                         # Set Video Height to 240px
 
+# Initialise Motor Controller and Obstacle Detection
 mc = MotorControl()
 obs = ObstacleDetection(pine_purple_min, pine_purple_max)
 
@@ -52,7 +64,6 @@ mc.setpins('ftft')
 try:
     while True:
         retval, frame = capture.read() 
-
         
         blank_frame = np.zeros_like(frame)
 
@@ -137,55 +148,57 @@ try:
         
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
-        # print(angle_yellow)
-        # print(angle_blue)
+        finish_angle = None
+        if time.time() - start_time > 60:
+            finish_angle = find_finish(frame_blur)
 
         
         if (angle != None):
-            angle = angle * object_multiplier
-            left_motor, right_motor = motor_speed(default_speed, angle, 0, kp)
-            # mc.setpins('ftft')
+            angle = angle * OBJECT_MULTIPLIER
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+
+            left_motor, right_motor = motor_speed(DEFAULT_SPEED, angle, 0, KP)
             print('angle', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         elif (arrow != None):
-            arrow = arrow * arrow_multiplier
-            left_motor, right_motor = motor_speed(default_speed, arrow, 0, kp)
-            # mc.setpins('ftft')
+            arrow = arrow * ARROW_MULTIPLIER
+
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, arrow, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+            
             print('arrow', left_motor, right_motor, arrow)
             mc.change_speed(left_motor, right_motor)
-            # time.sleep(0.5)
+        
+        elif (finish_angle != None):
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
 
+            print('Finish', left_motor, right_motor)
+            mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue == None):
-            left_motor = default_speed
-            right_motor = default_speed
-            # mc.setpins('ftft')
+            left_motor = DEFAULT_SPEED
+            right_motor = DEFAULT_SPEED
+
             print('none', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
-        elif (angle_yellow != None) and (angle_blue == None):
 
+        elif (angle_yellow != None) and (angle_blue == None):
             yellow_ref = 10 * np.pi / 180
-            left_motor, right_motor = motor_speed(default_speed, angle_yellow, yellow_ref, kp)
-            # mc.setpins('ftft')
-            if angle_yellow > np.pi / 2 - tight_turn_angle * np.pi / 180:
-                left_motor = int(tight_turn_multiplier * left_motor)
-                right_motor = int(tight_turn_multiplier * right_motor)
-                print('tight yellow', left_motor, right_motor)
-            else:
-                print('yellow', left_motor, right_motor)
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, angle_yellow, yellow_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+
+            print('yellow', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue != None):
             blue_ref = np.pi - 10 * np.pi / 180
-            left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
-            # mc.setpins('ftft')
-            if angle_blue > np.pi / 2 - tight_turn_angle * np.pi / 180:
-                left_motor = int(tight_turn_multiplier * left_motor)
-                right_motor = int(tight_turn_multiplier * right_motor)
-                print('tight blue', left_motor, right_motor)
-            else:
-                print('blue', left_motor, right_motor)
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, angle_blue, blue_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+
+            print('blue', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
         else:
@@ -203,8 +216,10 @@ try:
             elif angle_average >= 1.57:
                 angle_average_ref = 3.14
 
-            left_motor, right_motor = motor_speed(default_speed, angle_average, angle_average_ref, kp)
-            # mc.setpins('ftft')
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = motor_speed(DEFAULT_SPEED, angle_average, angle_average_ref, previous_time, previous_error, current_integral, KP, KI, KD)
+
+
             print('both', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 

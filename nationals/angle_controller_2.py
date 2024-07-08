@@ -3,7 +3,7 @@ import time
 INTEGRAL_MIN = 100
 INTEGRAL_MAX = 0
 
-def motor_speed(avg_speed, current_angle, current_integral, ref_angle, kp, ki):
+def motor_speed(avg_speed, current_angle, ref_angle, current_integral, kp, ki):
     
     error = ref_angle - current_angle
 
