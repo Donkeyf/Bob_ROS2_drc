@@ -18,7 +18,7 @@ pine_black_max = (360, 100, 50)
 black_min = pinehsv_to_cvhsv(pine_black_min)
 black_max = pinehsv_to_cvhsv(pine_black_max)
 
-capture = cv.VideoCapture(0)
+capture = cv.VideoCapture(1)
 capture.set(3, 128)
 capture.set(4, 96)
 
