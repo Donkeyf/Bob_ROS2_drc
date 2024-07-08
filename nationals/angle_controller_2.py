@@ -58,9 +58,12 @@ def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous
     output = proportional_output + integral_output + derivative_output
 
     print(f"Proportional Output is: {proportional_output}\n\
-          Error is: {error}\n\
-          Rolling Integral is: {current_integral}\n\
-          Integral Output is: {integral_output}")
+            Error is: {error}\n\
+            Rolling Integral is: {current_integral}\n\
+            Integral Output is: {integral_output}\n\
+            Derivative Output is: {derivative_output}\n\
+            Total Output is: {output}"
+        )
 
     left_motor_speed = int(avg_speed - output)
     right_motor_speed = int(avg_speed + output)
