@@ -1,5 +1,5 @@
-default_speed = 25
-kp = 13
+default_speed = 20
+kp = 10
 arrow_multiplier = 1.5
 object_multiplier = 1
 
