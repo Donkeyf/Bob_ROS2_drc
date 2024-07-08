@@ -150,7 +150,7 @@ try:
             angle = 1.2
             print('onstacle none', angle)
         
-        arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
+        # arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
         finish_angle = None
         if time.time() - start_time > 60:
@@ -166,14 +166,14 @@ try:
             print('angle', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
 
-        elif (arrow != None):
-            arrow = arrow * ARROW_MULTIPLIER
+        # elif (arrow != None):
+        #     arrow = arrow * ARROW_MULTIPLIER
 
-            left_motor, right_motor, previous_time, previous_error, current_integral \
-                = pid_motor_speed(DEFAULT_SPEED, arrow, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+        #     left_motor, right_motor, previous_time, previous_error, current_integral \
+        #         = pid_motor_speed(DEFAULT_SPEED, arrow, 0, previous_time, previous_error, current_integral, KP, KI, KD)
             
-            print('arrow', left_motor, right_motor, arrow)
-            mc.change_speed(left_motor, right_motor)
+        #     print('arrow', left_motor, right_motor, arrow)
+        #     mc.change_speed(left_motor, right_motor)
         
         elif (finish_angle != None):
             left_motor, right_motor, previous_time, previous_error, current_integral \
