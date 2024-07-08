@@ -186,7 +186,6 @@ try:
             left_motor = DEFAULT_SPEED
             right_motor = DEFAULT_SPEED
 
-            current_integral = 0
             _, _, previous_time, previous_error, current_integral \
                 = pid_motor_speed(DEFAULT_SPEED, 0, 0, previous_time, previous_error, current_integral, KP, KI, KD)
 
