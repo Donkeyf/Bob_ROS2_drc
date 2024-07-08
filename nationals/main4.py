@@ -180,7 +180,7 @@ try:
             blue_ref = np.pi - 10 * np.pi / 180
             left_motor, right_motor = motor_speed(default_speed, angle_blue, blue_ref, kp)
             # mc.setpins('ftft')
-            if angle_yellow > np.pi / 2 - tight_turn_angle * np.pi / 180:
+            if angle_blue > np.pi / 2 - tight_turn_angle * np.pi / 180:
                 left_motor = int(tight_turn_multiplier * left_motor)
                 right_motor = int(tight_turn_multiplier * right_motor)
                 print('tight blue', left_motor, right_motor)
