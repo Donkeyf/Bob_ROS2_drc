@@ -162,7 +162,7 @@ try:
             # time.sleep(0.5)
         
         elif (finish_angle != None):
-            left_motor, right_motor = motor_speed(default_speed, finish_angle, np.pi/2)
+            left_motor, right_motor = motor_speed(default_speed, finish_angle, np.pi/2, kp)
             mc.change_speed(left_motor, right_motor)
             print('Finish', left_motor, right_motor)
 
