@@ -63,6 +63,7 @@ mc.setpins('ftft')
 
 previous_time = time.time()
 previous_error = 0
+current_integral = 0
 
 try:
     while True:
