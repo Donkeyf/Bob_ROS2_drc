@@ -5,7 +5,7 @@ OBJECT_MULTIPLIER = 1
 
 # PID Controller Gains
 KP = 9
-KI = 0
+KI = 10
 KD = 0
 
 import cv2 as cv
