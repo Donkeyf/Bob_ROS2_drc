@@ -1,10 +1,10 @@
 # Configuration Parameters for Motor Control and Object Detection
-DEFAULT_SPEED = 25
+DEFAULT_SPEED = 20
 ARROW_MULTIPLIER = 1.5
 OBJECT_MULTIPLIER = 1
 
 # PID Controller Gains
-KP = 13
+KP = 9
 KI = 0
 KD = 0
 
