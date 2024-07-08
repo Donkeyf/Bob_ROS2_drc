@@ -30,7 +30,7 @@ def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous
     error = ref_angle - current_angle
     current_time = time.time()
     delta_time = current_time - previous_time
-    # delta_error = error - previous_error
+    delta_error = error - previous_error
 
     # ---------------------
     # PROPORTIONAL CONTROLLER
@@ -48,11 +48,12 @@ def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous
     # ---------------------
     # DERIVATIVE CONTROLLER
     # ---------------------
+    current_derivative = delta_error/delta_time
 
-    # TO BE IMPLEMENTED
+    derivative_output = current_derivative * kd
 
     # ---------------------
-    output = proportional_output + integral_output
+    output = proportional_output + integral_output + derivative_output
 
     print("Proportional Output is: f{proportional_output}\n\
           Rolling Integral is: f{new_integral}\n\
@@ -64,4 +65,7 @@ def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous
     left_motor_speed = max(min(100, left_motor_speed), 0)
     right_motor_speed = max(min(100, right_motor_speed), 0)
     
-    return (left_motor_speed, right_motor_speed, current_time, error, current_integral)
+    previous_time = current_time
+    previous_error = error
+
+    return (left_motor_speed, right_motor_speed, previous_time, previous_error, current_integral)
