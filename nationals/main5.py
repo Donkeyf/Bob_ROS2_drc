@@ -61,6 +61,9 @@ obs = ObstacleDetection(pine_purple_min, pine_purple_max)
 
 mc.setpins('ftft')
 
+previous_time = time.time()
+previous_error = 0
+
 try:
     while True:
         retval, frame = capture.read() 
