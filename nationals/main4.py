@@ -1,5 +1,5 @@
 default_speed = 50
-kp = 10
+kp = 17
 arrow_multiplier = 1.5
 object_multiplier = 1
 tight_turn_multiplier = 0.6
