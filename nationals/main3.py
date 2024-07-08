@@ -23,7 +23,7 @@ from obstacle3 import ObstacleDetection
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
 
-pine_blue_min = (195, 20, 60)
+pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
 
 pine_black_min = (0, 0, 0)
