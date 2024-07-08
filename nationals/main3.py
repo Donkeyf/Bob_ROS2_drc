@@ -13,12 +13,15 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 from motor_control_2 import MotorControl
 from angle_controller import motor_speed
 from arrow_detect_1 import arrow_detect_1
+from start_stop import find_finish
 
 import RPi.GPIO as gpio
 
 import time
 
 from obstacle3 import ObstacleDetection
+
+start_time = time.time()
 
 pine_yellow_min = (40, 5, 50)
 pine_yellow_max = (70, 100, 100)
@@ -31,6 +34,9 @@ pine_black_max = (360, 100, 50)
 
 pine_purple_min = (270, 10, 25)
 pine_purple_max = (330, 60, 100)
+
+pine_green_min = (75, 19, 50)
+pine_green_max = (80, 45, 90)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
@@ -135,8 +141,9 @@ try:
         
         arrow = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
 
-        # print(angle_yellow)
-        # print(angle_blue)
+        finish_angle = None
+        if time.time() - start_time > 60:
+            finish_angle = find_finish(frame_blur)
 
         
         if (angle != None):
@@ -153,7 +160,11 @@ try:
             print('arrow', left_motor, right_motor, arrow)
             mc.change_speed(left_motor, right_motor)
             # time.sleep(0.5)
-
+        
+        elif (finish_angle != None):
+            left_motor, right_motor = motor_speed(default_speed, finish_angle, np.pi/2)
+            mc.change_speed(left_motor, right_motor)
+            print('Finish', left_motor, right_motor)
 
         elif (angle_yellow == None) and (angle_blue == None):
             left_motor = default_speed
