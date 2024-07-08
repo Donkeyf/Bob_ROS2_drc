@@ -2,7 +2,7 @@ import time
 
 # INTEGRAL_MIN = 100
 # INTEGRAL_MAX = 0
-INTEGRAL_MIN = 0
+INTEGRAL_MIN = -100
 INTEGRAL_MAX = 100
 
 def motor_speed(avg_speed, current_angle, ref_angle, current_integral, kp, ki):
