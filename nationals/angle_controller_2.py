@@ -1,3 +1,8 @@
+import time
+
+INTEGRAL_MIN = 100
+INTEGRAL_MAX = 0
+
 def motor_speed(avg_speed, current_angle, current_integral, ref_angle, kp, ki):
     
     error = ref_angle - current_angle
@@ -20,22 +25,43 @@ def motor_speed(avg_speed, current_angle, current_integral, ref_angle, kp, ki):
     
     return (left_motor, right_motor, new_integral)
 
-# def PID(Kp, Ki, setpoint, measurement):
-#     global time, integral, time_prev, e_prev
-
-#     # Value of offset - when the error is equal zero
-#     offset = 320
+def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous_error, current_integral, kp, ki, kd):
     
-#     # PID calculations
-#     e = setpoint - measurement
-        
-#     P = Kp*e
-#     integral = integral + Ki*e*(time - time_prev)
+    error = ref_angle - current_angle
+    current_time = time.time()
+    delta_time = current_time - previous_time
+    # delta_error = error - previous_error
 
-#     # calculate manipulated variable - MV 
-#     MV = offset + P + integral
+    # ---------------------
+    # PROPORTIONAL CONTROLLER
+    # ---------------------
+    proportional_output = kp * error
+
+    # ---------------------
+    # INTEGRAL CONTROLLER
+    # ---------------------
+    current_integral += error * delta_time
+    current_integral = max(min(INTEGRAL_MAX, current_integral), INTEGRAL_MIN)
+
+    integral_output = ki * current_integral
+
+    # ---------------------
+    # DERIVATIVE CONTROLLER
+    # ---------------------
+
+    # TO BE IMPLEMENTED
+
+    # ---------------------
+    output = proportional_output + integral_output
+
+    print("Proportional Output is: f{proportional_output}\n\
+          Rolling Integral is: f{new_integral}\n\
+          Integral Output is: f{integral_output}")
+
+    left_motor_speed = int(avg_speed - output)
+    right_motor_speed = int(avg_speed + output)
+
+    left_motor_speed = max(min(100, left_motor_speed), 0)
+    right_motor_speed = max(min(100, right_motor_speed), 0)
     
-#     # update stored data for next iteration
-#     e_prev = e
-#     time_prev = time
-#     return MV
+    return (left_motor_speed, right_motor_speed, current_time, error, current_integral)
