@@ -7,17 +7,17 @@ class MotorControl():
     def __init__(self):
         #Left motor
         # 27 - In 1 - Motor 1 - Green
-        self.p_in1 = 27
+        self.p_in1 = 17
         # 17 - In 2 - Motor 1 - Yellow
-        self.p_in2 = 17
+        self.p_in2 = 27
         # 13 (pwm) - ENA - Motor 1 - Blue
         self.p_ena = 13
 
         #right motor
         # 24 - In 3 - Motor 2 - White furthest from green
-        self.p_in3 = 24
+        self.p_in3 = 23
         # 23 - In 4 - Motor 2 - White closest to green
-        self.p_in4 = 23
+        self.p_in4 = 24
         # 12 (pwm) - ENB - Motor 2 - Purple
         self.p_enb = 12
 
