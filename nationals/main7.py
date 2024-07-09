@@ -45,21 +45,28 @@ pine_yellow_max = (55, 100, 100)
 pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
 
-pine_black_min = (0, 0, 0)
-pine_black_max = (360, 100, 50)
+# # Original black
+
+# pine_black_min = (0, 0, 0)
+# pine_black_max = (360, 100, 50)
+
+# Room black
+
+pine_black_min = (80, 0, 0)
+pine_black_max = (130, 100, 40)
 
 pine_purple_min = (270, 10, 25)
 pine_purple_max = (330, 60, 100)
 
-# Green in the test room (D block)
+# # Green in the test room (D block)
 
-pine_green_min = (130, 5, 70)
-pine_green_max = (170, 100, 100)
+# pine_green_min = (130, 5, 70)
+# pine_green_max = (170, 100, 100)
 
 # Green in actual competition is below (O block)
 
-# pine_green_min = (55, 19, 50)
-# pine_green_max = (70, 45, 90)
+pine_green_min = (55, 19, 50)
+pine_green_max = (70, 45, 90)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
