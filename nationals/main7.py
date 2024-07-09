@@ -170,7 +170,7 @@ try:
 
             if (angle_yellow < 70 * np.pi / 180) or (angle_yellow > 110 * np.pi / 180):
                 theta_yellow_list = np.sort(theta_yellow_list)
-                theta_yellow_list_remove = theta_yellow_list[:int(len(theta_yellow_list) / 2)]
+                theta_yellow_list_remove = theta_yellow_list[int(len(theta_yellow_list) / 2),:]
                 angle_yellow = np.average(theta_yellow_list_remove)
                 if angle_yellow < 0:
                     angle_yellow = angle_yellow + np.pi
