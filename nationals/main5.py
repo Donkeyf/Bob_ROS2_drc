@@ -4,9 +4,9 @@ ARROW_MULTIPLIER = 1.5
 OBJECT_MULTIPLIER = 1
 
 # PID Controller Gains
-KP = 9
-KI = 10
-KD = 0
+KP = 25
+KI = 0
+KD = 23
 
 import cv2 as cv
 import numpy as np
