@@ -170,6 +170,7 @@ try:
             
             print('arrow', left_motor, right_motor, arrow_angle)
             mc.change_speed(left_motor, right_motor)
+            time.sleep(0.5)
 
         elif (ob_angle != None):
             ob_angle = ob_angle * OBJECT_MULTIPLIER
