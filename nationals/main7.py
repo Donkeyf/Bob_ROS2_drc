@@ -129,7 +129,7 @@ try:
 
             if (angle_blue < 70 * np.pi / 180) or (angle_blue > 110 * np.pi / 180):
                 theta_blue_list = np.sort(theta_blue_list)
-                theta_blue_list_remove = theta_blue_list[:int(len(theta_blue_list) / 2)]
+                theta_blue_list_remove = theta_blue_list[:int(len(theta_blue_list) / 2) + 1]
                 angle_blue = np.average(theta_blue_list_remove)
                 if angle_blue < 0:
                     angle_blue = angle_blue + np.pi
@@ -213,10 +213,18 @@ try:
             time.sleep(0.5)
 
         elif (ob_angle != None):
-            ob_angle = ob_angle * OBJECT_MULTIPLIER
-            left_motor, right_motor, previous_time, previous_error, current_integral \
-                = pid_motor_speed(DEFAULT_SPEED, ob_angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
-            print('obstacle', left_motor, right_motor)
+            if ob_angle < 1.5:
+                ob_angle = ob_angle * OBJECT_MULTIPLIER
+                left_motor, right_motor, previous_time, previous_error, current_integral \
+                    = pid_motor_speed(DEFAULT_SPEED, ob_angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+                print('obstacle', left_motor, right_motor)
+            
+            else:
+                ob_angle = ob_angle * OBJECT_MULTIPLIER
+                left_motor, right_motor, previous_time, previous_error, current_integral \
+                    = pid_motor_speed(DEFAULT_SPEED, ob_angle, np.pi, previous_time, previous_error, current_integral, KP, KI, KD)
+                print('obstacle', left_motor, right_motor)
+
             mc.change_speed(left_motor, right_motor)
         
         elif (finish_angle != None):
