@@ -160,7 +160,7 @@ try:
 
         #look for finish line
         finish_angle = None
-        if time.time() - start_time > 60:
+        if time.time() - start_time > 3:
             finish_angle = find_finish(frame_blur)
 
 
