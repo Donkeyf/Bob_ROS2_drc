@@ -54,11 +54,11 @@ while True:
     sides = len(hull)
     print(sides)
 
-    # if 6 > sides > 3 and sides + 2 == len(approx):
-    #     arrow_tip = find_tip(approx[:,0,:], hull.squeeze())
-    #     if arrow_tip:
-    cv2.drawContours(img, [cnt], -1, (0, 255, 0), 3)
-    # cv2.circle(img, arrow_tip, 3, (0, 0, 255), cv2.FILLED)
+    if 6 > sides > 3 and sides + 2 == len(approx):
+        arrow_tip = find_tip(approx[:,0,:], hull.squeeze())
+        if arrow_tip:
+            cv2.drawContours(img, [cnt], -1, (0, 255, 0), 3)
+            cv2.circle(img, arrow_tip, 3, (0, 0, 255), cv2.FILLED)
 
     cv2.imshow("Image", img)
     key = cv2.waitKey(1)
