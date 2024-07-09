@@ -146,7 +146,7 @@ try:
             y0_yellow = None
 
         # print(angle_yellow, x0_yellow, y0_yellow)
-        cent = obs.obstacle_box(frame_fresh)
+        cent = obs.obstacle_box(frame)
         if cent == None:
             ob_angle = None
         elif x0_blue != None or x0_yellow != None:
