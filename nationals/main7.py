@@ -66,7 +66,7 @@ pine_purple_max = (330, 60, 100)
 # Green in actual competition is below (O block)
 
 pine_green_min = (55, 19, 50)
-pine_green_max = (70, 45, 100)
+pine_green_max = (70, 60, 100)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
