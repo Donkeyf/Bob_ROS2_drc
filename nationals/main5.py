@@ -1,5 +1,5 @@
 # Configuration Parameters for Motor Control and Object Detection
-DEFAULT_SPEED = 60
+DEFAULT_SPEED = 80
 ARROW_MULTIPLIER = 1.5
 OBJECT_MULTIPLIER = 1
 
