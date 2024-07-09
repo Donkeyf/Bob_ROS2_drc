@@ -30,7 +30,7 @@ from obstacle3 import ObstacleDetection
 start_time = time.time()
 
 pine_yellow_min = (40, 5, 50)
-pine_yellow_max = (70, 100, 100)
+pine_yellow_max = (55, 100, 100)
 
 pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
@@ -41,8 +41,8 @@ pine_black_max = (360, 100, 50)
 pine_purple_min = (270, 10, 25)
 pine_purple_max = (330, 60, 100)
 
-pine_green_min = (75, 19, 50)
-pine_green_max = (80, 45, 90)
+pine_green_min = (55, 19, 50)
+pine_green_max = (70, 45, 90)
 
 yellow_min = pinehsv_to_cvhsv(pine_yellow_min)
 yellow_max = pinehsv_to_cvhsv(pine_yellow_max)
