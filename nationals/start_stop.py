@@ -9,7 +9,7 @@ def find_finish(pine_green_min, pine_green_max, frame_blur):
 
     frame_green = colour_filter(frame_blur, green_min, green_max, 5, 5, 0)
 
-    line_green = cv.HoughLinesP(frame_green, 1, np.pi / 180, 160, None, 0, 0)
+    line_green = cv.HoughLines(frame_green, 1, np.pi / 180, 160, None, 0, 0)
 
 
     if line_green is not None:
