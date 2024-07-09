@@ -59,7 +59,7 @@ def pid_motor_speed(avg_speed, current_angle, ref_angle, previous_time, previous
 
     print(f"Proportional Output is: {proportional_output}\n\
             Error is: {error}\n\
-            Rolling Integral is: {current_integral}\n\
+            Rolling Integral isx {current_integral}\n\
             Integral Output is: {integral_output}\n\
             Derivative Output is: {derivative_output}\n\
             Total Output is: {output}"

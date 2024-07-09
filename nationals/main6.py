@@ -4,9 +4,9 @@ ARROW_MULTIPLIER = 1.5
 OBJECT_MULTIPLIER = 1
 
 # PID Controller Gains
-KP = 25
+KP = 70
 KI = 0
-KD = 23
+KD = 40
 
 # # Configuration Parameters for Motor Control and Object Detection
 # DEFAULT_SPEED = 100
