@@ -38,7 +38,8 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
         
         # Getting the contour which is hopefully the arrow
         
-        cnt = contours_black[0]
+        # cnt = contours_black[0]
+        cnt = max(contours_black, key = cv.contourArea)
 
         # Other criteria for checking if it is an arrow
         # Finding midpoints of non-black pixels
@@ -63,31 +64,35 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
         
         # Criteria to determine arrow
         
+        # Left turn
+        
         if (cx > c_mid): # If mean black pixel is to the right of middle black pixel
             if (nonblack_mean < nonblack_middle): # If mean nonblack pixel is to the left of middle nonblack pixel
                 if (cy < y + h/2): # If mean black pixel is above middle black pixel
                     if (w * h > 2 * area) & (w * h < 5 * area): # If arrow is between 1/5 and 1/2 area of bounding box
                         # print('left', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
                         return -1
-            #         else:
-            #             print('nuh uh - not left - black to nonblack ratio is off')
-            #     else:
-            #         print('nuh uh - not left - black too low')
-            # else:
-            #     print('nuh uh - not left - nonblack mean is too right', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
+                    else:
+                        print('nuh uh - not left - black to nonblack ratio is off')
+                else:
+                    print('nuh uh - not left - black too low')
+            else:
+                print('nuh uh - not left - nonblack mean is too right', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
 
+        # Right turn
+        
         elif (cx < c_mid):
             if (nonblack_mean > nonblack_middle):
                 if (cy < y + h/2):
                     if (w * h > 2 * area) & (w * h < 5 * area):
                         # print('right', cx, c_mid, nonblack_mean, nonblack_middle, cy, y + h/2)
                         return 1
-        #             else:
-        #                 print('nuh uh - not right - black to nonblack ratio is off')
-        #         else:
-        #             print('nuh uh - not right - black too low')
-        #     else:
-        #         print('nuh uh - not right - nonblack mean is too left')
+                    else:
+                        print('nuh uh - not right - black to nonblack ratio is off')
+                else:
+                    print('nuh uh - not right - black too low')
+            else:
+                print('nuh uh - not right - nonblack mean is too left')
         # else:
         #     print('nuh uh - not an arrow')
 
@@ -105,7 +110,7 @@ def arrow_detect_1(frame, pine_black_min, pine_black_max):
 
 if __name__ == '__main__':
 
-    capture = cv.VideoCapture(1)
+    capture = cv.VideoCapture(0)
     capture.set(3, 128)
     capture.set(4, 96)
 
@@ -121,10 +126,20 @@ if __name__ == '__main__':
         frame_resize = frame
         frame_blur = frame_resize
 
-        pine_black_min = (0, 0, 0)
-        pine_black_max = (360, 100, 50)
+        # pine_black_min = (0, 0, 0)
+        # pine_black_max = (360, 100, 50)
+
+        pine_black_min = (60, 0, 0)
+        pine_black_max = (180, 100, 40)
         
-        print(arrow_detect_1(frame, pine_black_min, pine_black_max))
+        arrow_direction = arrow_detect_1(frame, pine_black_min, pine_black_max)
+        if arrow_direction == -1:
+            print('left')
+        elif arrow_direction == 1:
+            print('right')
+        # else:
+        #     print('none')
+
 
         # # Adds white border around the picture
         # frame[:, 0] = 0

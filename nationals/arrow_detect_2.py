@@ -5,7 +5,7 @@ from colour_filter import colour_filter
 from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 
 pine_black_min = (80, 0, 0)
-pine_black_max = (130, 100, 30)
+pine_black_max = (180, 100, 30)
 
 black_min = pinehsv_to_cvhsv(pine_black_min)
 black_max = pinehsv_to_cvhsv(pine_black_max)
