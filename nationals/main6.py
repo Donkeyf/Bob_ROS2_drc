@@ -162,6 +162,7 @@ try:
         finish_angle = None
         if time.time() - start_time > 3:
             finish_angle = find_finish(pine_green_min, pine_green_max, frame_blur)
+            print(finish_angle)
 
 
         if (arrow_angle != None):
