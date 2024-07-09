@@ -1,3 +1,13 @@
+# # Configuration Parameters for Motor Control and Object Detection
+# DEFAULT_SPEED = 40
+# ARROW_MULTIPLIER = 1.5
+# OBJECT_MULTIPLIER = 1
+
+# # PID Controller Gains
+# KP = 25
+# KI = 0
+# KD = 23
+
 # Configuration Parameters for Motor Control and Object Detection
 DEFAULT_SPEED = 100
 ARROW_MULTIPLIER = 1.5
@@ -6,7 +16,7 @@ OBJECT_MULTIPLIER = 1
 # PID Controller Gains
 KP = 25
 KI = 0
-KD = 23
+KD = 0
 
 import cv2 as cv
 import numpy as np
