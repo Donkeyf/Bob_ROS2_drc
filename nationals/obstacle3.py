@@ -95,3 +95,29 @@ class ObstacleDetection:
                 return 2.5
             elif (centroid[0] - blue_x < 180):
                 return 1.9
+
+if __name__ == '__main__':
+
+    capture = cv2.VideoCapture(0)
+    capture.set(3, 320)                         # Set Video Width to 320px
+    capture.set(4, 240)                         # Set Video Height to 240px
+
+    obs = ObstacleDetection(pine_purple_min, pine_purple_max)
+
+    while True:
+        retval, frame = capture.read() 
+
+        cent = obs.obstacle_box(frame)
+        print(cent)
+
+        cv2.circle(frame, (cent), 5, (255, 0, 0), 5)
+
+
+        cv2.imshow('frame', frame)
+        key = cv2.waitKey(1)
+
+        if key == ord('f'):
+            break
+
+        elif key == ord('p'):
+            cv2.waitKey(-1)
