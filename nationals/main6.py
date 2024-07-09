@@ -183,7 +183,9 @@ try:
 
             print('Finish', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
-
+            time.sleep(0.5)
+            exit()
+            
         elif (angle_yellow == None) and (angle_blue == None):
             left_motor = DEFAULT_SPEED
             right_motor = DEFAULT_SPEED
