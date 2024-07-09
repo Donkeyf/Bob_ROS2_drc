@@ -193,7 +193,9 @@ try:
                 = pid_motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
 
             print('Finish', left_motor, right_motor)
-            mc.change_speed(0, 0)
+
+            mc.change_speed(left_motor, right_motor)
+            time.sleep(2)
             exit()
 
         elif (angle_yellow == None) and (angle_blue == None):
