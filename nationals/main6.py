@@ -194,8 +194,8 @@ try:
 
             print('Finish', left_motor, right_motor)
 
-            mc.change_speed(left_motor, right_motor)
-            time.sleep(2)
+            mc.change_speed(70, 70)
+            time.sleep(0.2)
             exit()
 
         elif (angle_yellow == None) and (angle_blue == None):
