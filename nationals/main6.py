@@ -1,12 +1,12 @@
 # Configuration Parameters for Motor Control and Object Detection
-DEFAULT_SPEED = 100
+DEFAULT_SPEED = 40
 ARROW_MULTIPLIER = 1.5
 OBJECT_MULTIPLIER = 1
 
 # PID Controller Gains
 KP = 25
 KI = 0
-KD = 0
+KD = 23
 
 # # Configuration Parameters for Motor Control and Object Detection
 # DEFAULT_SPEED = 100
@@ -177,13 +177,13 @@ try:
             print('obstacle', left_motor, right_motor)
             mc.change_speed(left_motor, right_motor)
         
-        # elif (finish_angle != None):
-        #     left_motor, right_motor, previous_time, previous_error, current_integral \
-        #         = pid_motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
+        elif (finish_angle != None):
+            left_motor, right_motor, previous_time, previous_error, current_integral \
+                = pid_motor_speed(DEFAULT_SPEED, finish_angle, np.pi/2, previous_time, previous_error, current_integral, KP, KI, KD)
 
-        #     print('Finish', left_motor, right_motor)
-        #     mc.change_speed(0, 0)
-        #     exit()
+            print('Finish', left_motor, right_motor)
+            mc.change_speed(0, 0)
+            exit()
 
         elif (angle_yellow == None) and (angle_blue == None):
             left_motor = DEFAULT_SPEED
