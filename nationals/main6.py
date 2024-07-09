@@ -84,6 +84,7 @@ try:
         frame_fresh = frame.copy()
         frame = frame[int(len(frame)/2):int(len(frame))]
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
+        frame_fresh_blur = cv.GaussianBlur(frame_fresh, (11,11), 100)
 
         frame_blue = colour_filter(frame_blur, blue_min, blue_max, 5, 5, 0)
         frame_yellow = colour_filter(frame_blur, yellow_min, yellow_max, 5, 5, 0)
@@ -154,7 +155,7 @@ try:
             ob_angle = 1.2
         
         #detect arrow
-        arrow_angle = arrow_detect_1(frame_blur, pine_black_min, pine_black_max)
+        arrow_angle = arrow_detect_1(frame_fresh_blur, pine_black_min, pine_black_max)
 
         #look for finish line
         finish_angle = None
