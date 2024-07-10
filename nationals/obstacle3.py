@@ -94,14 +94,14 @@ class ObstacleDetection:
             
             if (yellow_x - centroid[0] < 60):
                 return 0.6
-            elif (yellow_x - centroid[0] < 130):
+            elif (yellow_x - centroid[0] < 180):
                 return 1.2
             
             # Go left
             
             elif (centroid[0] - blue_x < 60):
                 return 2.5
-            elif (centroid[0] - blue_x < 130):
+            elif (centroid[0] - blue_x < 180):
                 return 1.9
 
 if __name__ == '__main__':

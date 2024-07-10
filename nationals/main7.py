@@ -196,10 +196,9 @@ try:
         cent = obs.obstacle_box(frame)
         if cent == None:
             ob_angle = None
-        elif x0_blue != None or x0_yellow != None:
-            ob_angle = obs.man_direction(cent, x0_blue, x0_yellow)
         else:
-            ob_angle = 1.2
+            ob_angle = obs.man_direction(cent, x0_blue, x0_yellow)
+
         
         arrow_angle = None
         #detect arrow
