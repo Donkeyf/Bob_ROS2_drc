@@ -58,7 +58,7 @@ class ObstacleDetection:
         if (centroid[0] == None) and yellow_x == None and blue_x == None:
             return None
         
-        elif blue_x == None:
+        elif blue_x == None and yellow_x != None:
             
             # If you don't see blue, go right
             
@@ -69,7 +69,7 @@ class ObstacleDetection:
             else:
                 return None
             
-        elif yellow_x == None:
+        elif yellow_x == None and blue_x != None:
             
             # If you don't see yellow, go left
             
@@ -79,21 +79,29 @@ class ObstacleDetection:
                 return 1.9
             else:
                 return None
+
+        elif centroid[0] != None and blue_x == None and yellow_x == None:
             
+            if centroid[0] < 160:
+                return 1.2
+            
+            else:
+                return 2.5
+
         else:
             
             # Go right
             
             if (yellow_x - centroid[0] < 60):
                 return 0.6
-            elif (yellow_x - centroid[0] < 180):
+            elif (yellow_x - centroid[0] < 130):
                 return 1.2
             
             # Go left
             
             elif (centroid[0] - blue_x < 60):
                 return 2.5
-            elif (centroid[0] - blue_x < 180):
+            elif (centroid[0] - blue_x < 130):
                 return 1.9
 
 if __name__ == '__main__':
