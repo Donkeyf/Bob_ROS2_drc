@@ -50,21 +50,3 @@ def arrow_detect_1(pine_black_min, pine_black_max, frame_blur):
 
     return angle_black
 
-capture = cv.VideoCapture(0)
-capture.set(3, 320)                         # Set Video Width to 320px
-capture.set(4, 240)  
-
-while True:
-    ret, img = capture.read()
-    frame_blur = cv.GaussianBlur(img, (11,11), 100)
-
-    angle = arrow_detect_1(pine_black_min, pine_black_max, frame_blur)
-
-    print(angle)
-
-    cv.imshow("Image", img)
-    key = cv.waitKey(1)
-    if key == ord('f'):
-        break
-
-
