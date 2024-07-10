@@ -42,7 +42,7 @@ left_right = False #false is right
 start_time = time.time()
 
 pine_yellow_min = (40, 5, 50)
-pine_yellow_max = (55, 100, 100)
+pine_yellow_max = (55, 50, 100)
 
 pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
