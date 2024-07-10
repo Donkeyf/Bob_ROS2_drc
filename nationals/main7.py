@@ -28,7 +28,7 @@ from pinehsv_to_cvhsv import pinehsv_to_cvhsv
 from motor_control_2 import MotorControl
 from angle_controller import motor_speed
 from angle_controller_2 import pid_motor_speed
-from arrow_detect_1 import arrow_detect_1
+from arrow_detect_3 import arrow_detect_1
 from start_stop import find_finish
 
 import RPi.GPIO as gpio
@@ -36,6 +36,8 @@ import RPi.GPIO as gpio
 import time
 
 from obstacle3 import ObstacleDetection
+
+left_right = False #false is right
 
 start_time = time.time()
 
@@ -45,15 +47,15 @@ pine_yellow_max = (55, 100, 100)
 pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
 
-# Original black
+# # Original black
+
+# pine_black_min = (0, 0, 0)
+# pine_black_max = (360, 100, 50)
+
+# Room black
 
 pine_black_min = (0, 0, 0)
 pine_black_max = (360, 100, 50)
-
-# # Room black
-
-# pine_black_min = (80, 0, 0)
-# pine_black_max = (130, 100, 40)
 
 pine_purple_min = (270, 10, 25)
 pine_purple_max = (330, 60, 100)
@@ -201,19 +203,23 @@ try:
         
         arrow_angle = None
         #detect arrow
-        # arrow_angle = arrow_detect_1(frame_fresh_blur, pine_black_min, pine_black_max)
+        arrow_angle = arrow_detect_1(frame_fresh_blur, pine_black_min, pine_black_max)
 
         #look for finish line
         finish_angle = None
-        if time.time() - start_time > 3:
+        if time.time() - start_time > 30:
             finish_angle = find_finish(pine_green_min, pine_green_max, frame_blur)
             print(finish_angle)
 
 
         if (arrow_angle != None):
             arrow_angle = arrow_angle * ARROW_MULTIPLIER
-            left_motor, right_motor, previous_time, previous_error, current_integral \
-                = pid_motor_speed(DEFAULT_SPEED, arrow_angle, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+            if left_right:
+                left_motor, right_motor, previous_time, previous_error, current_integral \
+                    = pid_motor_speed(DEFAULT_SPEED, 1.2, 0, previous_time, previous_error, current_integral, KP, KI, KD)
+            else:
+                left_motor, right_motor, previous_time, previous_error, current_integral \
+                    = pid_motor_speed(DEFAULT_SPEED, 2, np.pi, previous_time, previous_error, current_integral, KP, KI, KD)
             
             print('arrow', left_motor, right_motor, arrow_angle)
             mc.change_speed(left_motor, right_motor)
