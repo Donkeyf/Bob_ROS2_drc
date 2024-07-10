@@ -98,7 +98,7 @@ try:
         retval, frame = capture.read() 
 
         frame_fresh = frame.copy()
-        frame = frame[int(len(frame)/2):int(len(frame))]
+        # frame = frame[int(len(frame)/2):int(len(frame))]
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
         frame_fresh_blur = cv.GaussianBlur(frame_fresh, (11,11), 100)
 
