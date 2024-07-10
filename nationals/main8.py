@@ -42,7 +42,7 @@ left_right = False #false is right
 start_time = time.time()
 
 pine_yellow_min = (40, 5, 50)
-pine_yellow_max = (55, 50, 100)
+pine_yellow_max = (55, 100, 100)
 
 pine_blue_min = (185, 20, 60)
 pine_blue_max = (220, 100, 100)
@@ -98,7 +98,7 @@ try:
         retval, frame = capture.read() 
 
         frame_fresh = frame.copy()
-        frame = frame[int(len(frame)/2):int(len(frame))] 
+        frame = frame[int(len(frame)/2):int(len(frame))]
         frame_blur = cv.GaussianBlur(frame, (11,11), 100)
         frame_fresh_blur = cv.GaussianBlur(frame_fresh, (11,11), 100)
 
@@ -196,9 +196,10 @@ try:
         cent = obs.obstacle_box(frame)
         if cent == None:
             ob_angle = None
-        else:
+        elif x0_blue != None or x0_yellow != None:
             ob_angle = obs.man_direction(cent, x0_blue, x0_yellow)
-
+        else:
+            ob_angle = 1.2
         
         arrow_angle = None
         #detect arrow
@@ -206,9 +207,9 @@ try:
 
         #look for finish line
         finish_angle = None
-        if time.time() - start_time > 30:
-            finish_angle = find_finish(pine_green_min, pine_green_max, frame_blur)
-            print(finish_angle)
+       # if time.time() - start_time > 30:
+        #    finish_angle = find_finish(pine_green_min, pine_green_max, frame_blur)
+         #   print(finish_angle)
 
 
         if (arrow_angle != None):
