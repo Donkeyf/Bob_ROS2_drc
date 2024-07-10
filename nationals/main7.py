@@ -203,7 +203,7 @@ try:
         
         arrow_angle = None
         #detect arrow
-        arrow_angle = arrow_detect_1(frame_fresh_blur, pine_black_min, pine_black_max)
+        # arrow_angle = arrow_detect_1(frame_fresh_blur, pine_black_min, pine_black_max)
 
         #look for finish line
         finish_angle = None
